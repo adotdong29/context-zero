@@ -13,6 +13,82 @@ re-exported through `coordpy.__init__` or
 `coordpy.SDK_VERSION == "coordpy.sdk.v3.43"`, the smoke driver,
 the public symbols) is byte-for-byte unchanged.
 
+- **W78 Stronger Less-Bounded Long-Horizon Reconstruction /
+  Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent
+  Substrate Programme** (post-W77, 2026-05-17) —
+  *twenty-third substrate-attack milestone; fourteenth **multi-
+  agent task-success-bearing** substrate milestone (first to win
+  across **eighteen** regimes: W77's seventeen plus
+  ``long_delay_reconstruction_after_compound_chain_failure``);
+  first milestone to **operationalise long-horizon-
+  reconstruction-aware Plane A↔B handoff promotion**, first to
+  **expose a content-addressed per-turn long-horizon-
+  reconstruction trajectory CID** that unifies all fourteen W77
+  primitives + the new long-horizon-reconstruction-event chain
+  into a single dominant signal back into the substrate-routed
+  policy, and **first to make the bounded-window transcript
+  baseline an explicit first-class load-bearing falsifier**
+  (the W78 philosophical change: less-bounded context over
+  fixed-k visible windows)*. Twenty-one orthogonal advances on
+  top of W77 (13 Plane B v-bumps + 7 Plane A V11 + 1 new
+  bounded-window-baseline V1 falsifier). Plane B: (M1) **Tiny
+  Substrate V23** (inherits V22 substrate + one new V23 axis —
+  per-turn long-horizon-reconstruction trajectory CID, per-layer
+  long-horizon-reconstruction length label in [0..14], per-layer
+  long-horizon-reconstruction-pressure gate); (M2) **KV Bridge
+  V23** (nineteen-target stacked ridge + 156-dim long-horizon-
+  reconstruction fingerprint + long-horizon-reconstruction
+  falsifier); (M3) **Cache Controller V21** (eighteen-objective
+  stacked ridge + per-role 19-dim long-horizon-reconstruction-
+  pressure head); (M4) **Replay Controller V19** (twenty-six
+  regimes + sixteen-way long-horizon-reconstruction-aware routing
+  head); (M5) **Deep Substrate Hybrid V23** (twenty-three-way
+  bidirectional loop); (M6) **Substrate Adapter V23** with new
+  ``substrate_v23_full`` tier; (M7) **Persistent V30** (29
+  layers, max_chain_walk_depth=33554432, twenty-seventh
+  persistent skip carrier); (M8) **LHR V30** (29 heads,
+  max_k=2048, twenty-layer scorer — the largest k in the
+  programme to date); (M9) **MLSC V26** (long-horizon-
+  reconstruction-trajectory + reconstruction-request-window
+  chains); (M10) **Consensus V24** (42-stage chain); (M11)
+  **MASC V14** (30-policy, 18-regime); (M12) **TCC V13** (long-
+  horizon-reconstruction-pressure + long-horizon-reconstruction-
+  trajectory arbiters); (M13) **Long-Horizon Reconstruction
+  Substrate V1** (NEW load-bearing reconstruction primitive
+  that reads the persistent latent V30 chain and reconstructs
+  the W77 compound-chain-then-restart-then-replacement
+  trajectory CID *without looking at the visible transcript at
+  all*); (M14) **Bounded-Window Baseline V1** (NEW load-bearing
+  falsifier — five fixed-k baselines at k ∈ {4, 8, 16, 32} +
+  rolling-summary — that the W78 substrate provably beats on
+  long-horizon reconstruction queries outside any window). Plane
+  A V11: (H1) **Hosted Router V11** (long-horizon-reconstruction-
+  pressure weighting + long-horizon-reconstruction-after-PCR
+  match table); (H2) **Hosted Logprob V11** (long-horizon-
+  reconstruction-aware abstain floor + 9-pressure tiebreak);
+  (H3) **Hosted Cache-Aware Planner V11** (nine-layer rotated;
+  ≥ 89 % savings on 20×8 at hit_rate=1.0); (H4) **Hosted Cost
+  Planner V11** (cost-per-long-horizon-reconstruction-success-
+  under-budget + abstain-when-long-horizon-reconstruction-
+  pressure-violated); (H5) **Wall V11** (46 blocked axes at
+  hosted surface); (H6) **Handoff Coordinator V10** (long-
+  horizon-reconstruction-aware promotion + long-delay-
+  reconstruction-after-compound-chain-failure fallback; ≥ 87 %
+  cross-plane savings); (H7) **Provider Filter V10** (long-
+  horizon-reconstruction-aware drop). Adds benchmark families
+  ``coordpy.r193_benchmark`` (Plane A V11; 10 H-bars),
+  ``coordpy.r194_benchmark`` (Plane B V23; 18 H-bars),
+  ``coordpy.r195_benchmark`` (multi-agent task success across
+  18 regimes + bounded-window-baseline failure bar; 20 H-bars),
+  and ``coordpy.r196_benchmark`` (handoff V10 + bounded-window
+  falsifier + long-horizon limitation reproductions; 16
+  H-bars), totalling **64 H-bars × 3 seed sets**, all pass. Two
+  new closed-form linear ridge solves on top of W77's 77 (cache
+  V21 eighteen-objective + KV V23 nineteen-target), total **79
+  ridge solves across W61..W78**. ``W78_FAILURE_MODES``
+  enumerates **58 disjoint failure modes** (cumulative ≥ 1953
+  across W22..W78). ``coordpy.w78_team`` orchestrator. **No
+  version bump. No PyPI release.**
 - **W77 Stronger Replacement-After-Restart-After-Compound-Chain-
   Repair / Post-Restart-Replacement Budget-Primary Two-Plane
   Multi-Agent Substrate Programme** (post-W76, 2026-05-17) —

@@ -2,10 +2,57 @@
 
 > Canonical do-not-overstate rules for the Context Zero / CoordPy
 > programme. Every milestone note, paper draft, README claim, or
-> README-of-README must satisfy these rules. Last touched: post-W75
-> W76 milestone (Stronger Restart-After-Compound-Chain-Repair /
-> Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
+> README-of-README must satisfy these rules. Last touched: post-W77
+> W78 milestone (Stronger Less-Bounded Long-Horizon Reconstruction
+> / Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent
 > Substrate Programme research line), 2026-05-17.
+
+## W78 (Stronger Less-Bounded Long-Horizon Reconstruction / Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent Substrate Programme) — explicit do-not-overstate rules
+
+The W78 milestone introduces the V23 substrate (V22 substrate +
+one new long-horizon-reconstruction axis), the thirty-policy
+MASC V14 across eighteen regimes, the TCC V13, the hosted
+control plane V11 modules, the new **long-horizon-reconstruction-
+aware hosted-real handoff coordinator V10** that adds long-
+horizon-reconstruction-aware promotion + long-delay-
+reconstruction-after-compound-chain-failure fallback decision,
+the new **long-horizon-reconstruction-aware provider filter
+V10**, the new **long-horizon-reconstruction substrate V1**
+(the load-bearing W78 win — reads from persistent latent V30
+carrier, not the visible window), and the new **bounded-window
+baseline V1** module (the load-bearing anti-goal falsifier).
+Honest reading:
+
+* W78 is a single-step extension of W77. V23 strictly extends
+  V22 (does not replace it). All seventeen W77 regimes remain
+  load-bearing; W78 adds exactly one new regime
+  (``long_delay_reconstruction_after_compound_chain_failure``).
+* V23 wins are in-repo synthetic. The 100 % strict-beat rate of
+  V23 over V22 across eighteen regimes is measured *inside* the
+  deterministic MASC V14 harness. It is NOT a real-model multi-
+  agent task win. ``W78-L-MASC-V14-SYNTHETIC-CAP``.
+* The long-horizon-reconstruction-trajectory CID proves integrity
+  only at the in-repo substrate. The hosted surface does not see
+  it. ``W78-L-LONG-HORIZON-RECONSTRUCTION-IN-REPO-CAP``.
+* **The bounded-window-insufficiency claim is structural, not
+  scaled-to-frontier.** ``W78-T-BOUNDED-WINDOW-INSUFFICIENT``
+  proves that any predictor restricted to the last k visible
+  turns has zero information about events outside that window;
+  the W78 long-horizon-reconstruction substrate reads from the
+  persistent V30 carrier instead. The proof is by construction
+  within the synthetic regime; we do NOT claim that frontier
+  LLMs with long context windows are similarly bounded — they
+  have soft, learned attention, not a hard fixed-k window. The
+  W78 result is "fixed-k-transcript baselines are insufficient
+  for long-horizon multi-agent state retention", which is the
+  load-bearing anti-goal of the milestone.
+* No third-party hosted model has been bridged. The wall V11
+  enumerates 46 blocked axes; the W70 frontier_blocked_axes
+  list is unchanged. ``W78-L-NO-THIRD-PARTY-SUBSTRATE-COUPLING-CAP``,
+  ``W78-L-FRONTIER-SUBSTRATE-STILL-BLOCKED-CAP``.
+* No version bump, no PyPI release. ``coordpy.__version__ ==
+  "0.5.20"``, ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``
+  byte-for-byte unchanged.
 
 ## W76 (Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate Programme) — explicit do-not-overstate rules
 

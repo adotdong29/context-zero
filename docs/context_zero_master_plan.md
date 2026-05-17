@@ -1,6 +1,42 @@
 # Context-Zero — Master Plan
 
-> **Latest milestone marker (post-W76 / W77, 2026-05-17 —
+> **Latest milestone marker (post-W77 / W78, 2026-05-17 —
+> Stronger Less-Bounded Long-Horizon Reconstruction / Bounded-
+> Window-Falsifier Budget-Primary Two-Plane Multi-Agent
+> Substrate Programme, thirty-sixth post-release research
+> milestone — twenty-third substrate-attack milestone and
+> **fourteenth** multi-agent task-success-bearing substrate
+> milestone (the first to win across **eighteen** regimes —
+> W77's seventeen plus
+> ``long_delay_reconstruction_after_compound_chain_failure``),
+> the **first milestone to operationalise long-horizon-
+> reconstruction-aware Plane A↔B handoff promotion**, the **first
+> milestone to expose a content-addressed per-turn long-horizon-
+> reconstruction trajectory CID** unifying all fourteen W77
+> primitives + the new reconstruction-event chain into a single
+> dominant signal, and the **first milestone to make the
+> bounded-window transcript baseline an explicit first-class
+> load-bearing falsifier** (the W78 philosophical change against
+> regressing to fixed-k visible-window thinking).
+> ``coordpy.tiny_substrate_v23`` inherits V22's 23 physical
+> layers + one new V23 substrate axis.
+> ``coordpy.multi_agent_substrate_coordinator_v14`` ships 30
+> policies + the new 18th regime.
+> ``coordpy.team_consensus_controller_v13`` ships two new V13
+> arbiters. ``coordpy.hosted_real_handoff_coordinator_v10`` is
+> the thirteenth-decision handoff coordinator with long-horizon-
+> reconstruction-aware promotion + long-delay-reconstruction-
+> after-compound-chain-failure fallback.
+> ``coordpy.long_horizon_reconstruction_substrate_v1`` is the
+> NEW load-bearing reconstruction primitive that reads the
+> persistent latent V30 chain. ``coordpy.bounded_window_
+> baseline_v1`` is the NEW load-bearing falsifier module that
+> the W78 substrate provably beats. Total **64 H-bars × 3 seed
+> sets**, all pass. ``coordpy.__version__ == "0.5.20"``,
+> ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version bump.
+> No PyPI release.**
+
+> **Previous milestone marker (post-W76 / W77, 2026-05-17 —
 > Stronger Replacement-After-Restart-After-Compound-Chain-Repair
 > / Post-Restart-Replacement Budget-Primary Two-Plane Multi-Agent
 > Substrate Programme, thirty-fifth post-release research

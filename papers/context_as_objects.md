@@ -2,6 +2,58 @@
 
 > Main paper draft for the Context Zero programme.
 >
+> **Post-W77 research-line update (W78 Stronger Less-Bounded
+> Long-Horizon Reconstruction / Bounded-Window-Falsifier Budget-
+> Primary Two-Plane Multi-Agent Substrate Programme,
+> 2026-05-17).**
+>
+> *Twenty-third substrate-attack milestone, and the
+> **fourteenth** multi-agent task-success-bearing substrate
+> milestone in the programme — the first to produce wins across
+> **eighteen** failure-mode regimes (W77's seventeen plus
+> **long_delay_reconstruction_after_compound_chain_failure**),
+> the **first milestone to operationalise long-horizon-
+> reconstruction-aware Plane A↔B handoff promotion**, the **first
+> milestone to expose a content-addressed per-turn long-horizon-
+> reconstruction trajectory CID** unifying all fourteen W77
+> primitives + the new reconstruction-event chain into a single
+> dominant signal back into the substrate-routed policy, and the
+> **first milestone to make the bounded-window transcript
+> baseline an explicit first-class load-bearing falsifier** —
+> this is the W78 philosophical change against quietly regressing
+> to fixed-k visible-window thinking. ``MultiAgentSubstrateCoordinatorV14``
+> runs **thirty** policies (W77's twenty-eight plus
+> ``substrate_routed_v23`` and ``team_substrate_coordination_v23``)
+> across **eighteen** regimes; V23 strictly beats V22 on ≥ 50 %
+> of seeds in every regime (100 % in practice across all
+> eighteen). The new
+> ``coordpy.long_horizon_reconstruction_substrate_v1`` reads
+> from the persistent latent V30 carrier (29 layers, max_k=2048)
+> and reconstructs the W77 compound-chain-then-restart-then-
+> replacement trajectory CID *without looking at the visible
+> transcript at all* — the load-bearing W78 win against the
+> bounded-window baseline. The new
+> ``coordpy.bounded_window_baseline_v1`` exposes four fixed-k
+> baselines at k ∈ {4, 8, 16, 32} + rolling-summary, and proves
+> that any predictor restricted to the last k visible turns has
+> zero information about events outside that window —
+> **W78-T-BOUNDED-WINDOW-INSUFFICIENT** is code-backed. The
+> handoff coordinator V10 promotes any turn with
+> ``long_horizon_reconstruction_pressure ≥ 0.5`` to Plane B and
+> falls back to ``long_delay_reconstruction_after_compound_chain_
+> failure_fallback`` when the trajectory CID is non-empty under
+> hosted pressure; total cross-plane visible-token savings ≥ 88 %
+> over a 100-turn schedule.
+> ``coordpy.hosted_real_substrate_boundary_v11`` enumerates 46
+> blocked axes at the hosted surface (W77's 43 + 3 new V23 axes)
+> and carries forward the W70 frontier_blocked_axes set
+> unchanged. Two new closed-form linear ridge solves on top of
+> W77's 77 (cache V21 eighteen-objective + KV V23 nineteen-
+> target), total **79 ridge solves across W61..W78**. **No
+> version bump. No PyPI release.** Stable contract:
+> ``coordpy.__version__ == "0.5.20"``, ``coordpy.SDK_VERSION ==
+> "coordpy.sdk.v3.43"``.*
+>
 > **Post-W76 research-line update (W77 Stronger Replacement-After-
 > Restart-After-Compound-Chain-Repair / Post-Restart-Replacement
 > Budget-Primary Two-Plane Multi-Agent Substrate Programme,

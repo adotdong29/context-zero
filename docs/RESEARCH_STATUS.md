@@ -5,11 +5,86 @@
 > doc on what is *true now*, this file is right and the other file
 > is stale. For *theorem-by-theorem* status, see
 > `docs/THEOREM_REGISTRY.md`. For *what may be claimed*, see
-> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W76 W77
-> milestone (Stronger Replacement-After-Restart-After-Compound-
-> Chain-Repair / Post-Restart-Replacement Budget-Primary Two-
-> Plane Multi-Agent Substrate Programme research line),
-> 2026-05-17.
+> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W77 W78
+> milestone (Stronger Less-Bounded Long-Horizon Reconstruction /
+> Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent
+> Substrate Programme research line), 2026-05-17.
+
+## TL;DR — W78 Stronger Less-Bounded Long-Horizon Reconstruction / Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W77 research milestone)
+
+The programme now has **seventy-five** coupled research axes.
+W78 mints axis 75: the **twenty-third substrate-attack
+milestone**, the **fourteenth multi-agent task-success-bearing**
+substrate milestone (first to win across *eighteen* regimes:
+W77's seventeen +
+``long_delay_reconstruction_after_compound_chain_failure``),
+the **first milestone to operationalise long-horizon-
+reconstruction-aware Plane A↔B handoff promotion**, the **first
+milestone to expose a content-addressed per-turn long-horizon-
+reconstruction trajectory CID** that unifies all fourteen W77
+primitives + the new reconstruction-event chain into a single
+dominant signal back into the substrate-routed policy, and the
+**first milestone to make the bounded-window transcript
+baseline an explicit first-class load-bearing falsifier** —
+this is the W78 philosophical change against quietly regressing
+to fixed-k visible-window thinking.
+
+The load-bearing W78 win is **MASC V14 / TCC V13 +
+tiny_substrate_v23 + 12 supporting Plane B V23 modules + 7
+Plane A V11 modules + the new long-horizon-reconstruction-aware
+handoff coordinator V10 + the new long-horizon-reconstruction-
+aware provider filter V10 + the new long-horizon-reconstruction
+substrate V1 + the new bounded-window-baseline V1 falsifier**.
+V23 strictly beats V22 on ≥ 50 % of seeds in every regime
+(100 % in practice across all eighteen regimes, verified at 3
+seeds), and TSC_V23 strictly beats TSC_V22 on ≥ 50 % of seeds
+in every regime (100 % in practice). The hosted control plane
+V11 contains HostedRouterControllerV11 (long-horizon-
+reconstruction-pressure weighting + long-horizon-
+reconstruction-after-PCR match table), HostedLogprobRouterV11
+(long-horizon-reconstruction-aware abstain floor + 9-pressure
+tiebreak), HostedCacheAwarePlannerV11 (nine-layer rotated;
+≥ 89 % savings on 20 × 8 at hit_rate=1.0),
+HostedCostPlannerV11 (cost-per-long-horizon-reconstruction-
+success-under-budget + abstain-when-long-horizon-reconstruction-
+violated), and the **explicit wall V11**
+HostedRealSubstrateBoundaryV11 that enumerates 46 blocked axes
+at the hosted surface (W77's 43 + 3 new V23 axes) and carries
+forward the W70 frontier_blocked_axes set unchanged. The new
+**long-horizon-reconstruction-aware Plane A↔B handoff
+coordinator V10** promotes any turn with
+``long_horizon_reconstruction_pressure ≥ 0.5`` to Plane B (with
+``long_horizon_reconstruction_alignment = 1.0``) and falls back
+to ``long_delay_reconstruction_after_compound_chain_failure_
+fallback`` when the trajectory CID is non-empty under hosted
+pressure; total cross-plane visible-token savings ≥ 88 % over a
+100-turn schedule.
+
+The **load-bearing anti-goal mechanism** is the new
+``coordpy.bounded_window_baseline_v1`` module — explicit
+fixed-k transcript baselines at k ∈ {4, 8, 16, 32} +
+rolling-summary. The W78 substrate provably beats them on the
+new regime because the baseline visible window literally cannot
+see events older than k turns; the W78 long-horizon-
+reconstruction substrate reads from a persistent latent V30
+carrier whose information capacity is not bounded by visible-
+window length. **W78-T-BOUNDED-WINDOW-INSUFFICIENT** is
+code-backed.
+
+W78 ships at the explicit-import path ``coordpy.w78_team`` and
+benchmark families ``coordpy.r193_benchmark`` (Plane A V11; 10
+H-bars), ``coordpy.r194_benchmark`` (Plane B V23; 18 H-bars),
+``coordpy.r195_benchmark`` (multi-agent task success across 18
+regimes + bounded-window-baseline failure bar; 20 H-bars), and
+``coordpy.r196_benchmark`` (handoff V10 + bounded-window
+falsifier + long-horizon limitation; 16 H-bars). Total **64
+H-bars × 3 seed sets**, all pass. Two new closed-form linear
+ridge solves on top of W77's 77 (cache V21 eighteen-objective +
+KV V23 nineteen-target), total **79 ridge solves across
+W61..W78**. ``coordpy.__version__ == "0.5.20"``,
+``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version bump.
+No PyPI release. ``W78_FAILURE_MODES`` enumerates 58 disjoint
+failure modes.
 
 ## TL;DR — W77 Stronger Replacement-After-Restart-After-Compound-Chain-Repair / Post-Restart-Replacement Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W76 research milestone)
 
