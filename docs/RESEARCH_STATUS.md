@@ -5,10 +5,65 @@
 > doc on what is *true now*, this file is right and the other file
 > is stale. For *theorem-by-theorem* status, see
 > `docs/THEOREM_REGISTRY.md`. For *what may be claimed*, see
-> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W75 W76
-> milestone (Stronger Restart-After-Compound-Chain-Repair /
-> Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
-> Substrate Programme research line), 2026-05-17.
+> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W76 W77
+> milestone (Stronger Replacement-After-Restart-After-Compound-
+> Chain-Repair / Post-Restart-Replacement Budget-Primary Two-
+> Plane Multi-Agent Substrate Programme research line),
+> 2026-05-17.
+
+## TL;DR — W77 Stronger Replacement-After-Restart-After-Compound-Chain-Repair / Post-Restart-Replacement Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W76 research milestone)
+
+The programme now has **seventy-four** coupled research axes.
+W77 mints axis 74: the **twenty-second substrate-attack
+milestone**, the **thirteenth multi-agent task-success-bearing**
+substrate milestone (first to win across *seventeen* regimes:
+W76's sixteen +
+``replacement_after_restart_after_compound_chain_repair_under_budget``),
+the **first milestone to operationalise post-restart-replacement-
+aware Plane A↔B handoff promotion**, and the **first milestone
+to expose a content-addressed per-turn replacement-after-
+restart-after-compound-chain trajectory CID** that unifies all
+thirteen W76 primitives + the new post-restart-replacement
+window into a single dominant signal back into the substrate-
+routed policy.
+
+The load-bearing W77 win is **MASC V13 / TCC V12 +
+tiny_substrate_v22 + 11 supporting Plane B V22 modules + 5 Plane
+A V10 modules + the new post-restart-replacement-aware handoff
+coordinator V9 + the new post-restart-replacement-aware provider
+filter V9**: V22 strictly beats V21 on ≥ 50 % of seeds in every
+regime (100 % in practice across all seventeen regimes, verified
+at 5 seeds), and TSC_V22 strictly beats TSC_V21 on ≥ 50 % of
+seeds in every regime (100 % in practice). Plus an honest
+**hosted control plane V10**: HostedRouterControllerV10 (post-
+restart-replacement-pressure weighting + post-restart-
+replacement-after-PCR match table), HostedLogprobRouterV10
+(post-restart-replacement-aware abstain floor lowered under high
+PCR pressure + 8-pressure tiebreak), HostedCacheAwarePlannerV10
+(eight-layer rotated; ≥ 89 % savings on 20 × 8 at hit_rate=1.0),
+HostedCostPlannerV10 (cost-per-post-restart-replacement-success-
+under-budget + abstain-when-pcr-violated), and the **explicit
+wall V10** HostedRealSubstrateBoundaryV10 that enumerates 43
+blocked axes at the hosted surface (W76's 40 + 3 new V22 axes)
+and carries forward the W70 frontier_blocked_axes set unchanged.
+The new **post-restart-replacement-aware Plane A↔B handoff
+coordinator V9** promotes any turn with ``post_restart_
+replacement_pressure ≥ 0.5`` to Plane B (with
+``post_restart_replacement_alignment = 1.0``) and falls back to
+``replacement_after_restart_after_compound_chain_repair_fallback``
+when the trajectory CID is non-empty under hosted pressure;
+total cross-plane visible-token savings ≥ 86 % over a 100-turn
+schedule.
+
+W77 ships at the explicit-import path ``coordpy.w77_team`` and
+benchmark families ``coordpy.r189_benchmark`` (Plane A V10),
+``coordpy.r190_benchmark`` (Plane B V22),
+``coordpy.r191_benchmark`` (multi-agent 17-regime), and
+``coordpy.r192_benchmark`` (handoff V9 + falsifier + limitation).
+``coordpy.__version__ == "0.5.20"``,
+``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version bump.
+No PyPI release. ``W77_FAILURE_MODES`` enumerates 54 disjoint
+failure modes.
 
 ## TL;DR — W76 Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W75 research milestone)
 

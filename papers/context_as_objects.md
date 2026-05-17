@@ -2,9 +2,51 @@
 
 > Main paper draft for the Context Zero programme.
 >
-> **Post-W75 research-line update (W76 Stronger Restart-After-
-> Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-
-> Primary Two-Plane Multi-Agent Substrate Programme, 2026-05-17).**
+> **Post-W76 research-line update (W77 Stronger Replacement-After-
+> Restart-After-Compound-Chain-Repair / Post-Restart-Replacement
+> Budget-Primary Two-Plane Multi-Agent Substrate Programme,
+> 2026-05-17).**
+> *Twenty-second substrate-attack milestone, and the
+> **thirteenth** multi-agent task-success-bearing substrate
+> milestone in the programme — the first to produce wins across
+> **seventeen** failure-mode regimes (W76's sixteen plus
+> **replacement_after_restart_after_compound_chain_repair_under_budget**),
+> the **first milestone to operationalise post-restart-
+> replacement-aware Plane A↔B handoff promotion**, and the **first
+> milestone to expose a content-addressed per-turn replacement-
+> after-restart-after-compound-chain trajectory CID** that
+> unifies all thirteen W76 primitives + the new post-restart-
+> replacement window into a single dominant signal back into the
+> substrate-routed policy.
+> ``MultiAgentSubstrateCoordinatorV13`` runs **twenty-eight**
+> policies (W76's twenty-six plus ``substrate_routed_v22`` and
+> ``team_substrate_coordination_v22``) across **seventeen**
+> regimes and verifies that the V22 substrate-routed and TSC_V22
+> team-substrate-coordination policies strictly beat the V21 and
+> TSC_V21 baselines on ≥ 50 % of seeds in every regime (100 % in
+> practice across all seventeen regimes). The new post-restart-
+> replacement-aware hosted ↔ real handoff coordinator V9 records
+> per-turn V9 envelopes that promote any turn with
+> ``post_restart_replacement_pressure ≥ 0.5`` to Plane B with
+> ``post_restart_replacement_alignment = 1.0`` and adds a new
+> twelfth decision label
+> (``replacement_after_restart_after_compound_chain_repair_fallback``),
+> exposes a post-restart-replacement falsifier, and saves ≥ 86 %
+> visible tokens vs forcing every turn through ``hosted_only``.
+> The new post-restart-replacement-aware provider filter V9
+> drops providers whose declared post-restart-replacement-noise
+> score exceeds their per-provider cap under high post-restart-
+> replacement pressure. The W77 envelope verifier enumerates
+> **54 disjoint failure modes** and the cumulative trust boundary
+> across W22..W77 now sits at **≥ 1895 enumerated failure modes**.
+> Public SDK contract is byte-for-byte unchanged:
+> ``coordpy.__version__ == "0.5.20"`` /
+> ``SDK_VERSION == "coordpy.sdk.v3.43"``. No PyPI release.
+>
+> **Earlier post-W75 research-line update (W76 Stronger
+> Restart-After-Compound-Chain-Repair / Compound-Chain-Then-
+> Restart Budget-Primary Two-Plane Multi-Agent Substrate
+> Programme, 2026-05-17).**
 > *Twenty-first substrate-attack milestone, and the **twelfth**
 > multi-agent task-success-bearing substrate milestone in the
 > programme — the first to produce wins across **sixteen**

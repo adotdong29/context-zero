@@ -1,34 +1,44 @@
 # Context-Zero — Master Plan
 
-> **Latest milestone marker (post-W75 / W76, 2026-05-17 —
-> Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-
-> Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate
-> Programme, thirty-fourth post-release research milestone —
-> twenty-first substrate-attack milestone and **twelfth** multi-
-> agent task-success-bearing substrate milestone (the first to win
-> across **sixteen** regimes — W75's fifteen plus
-> ``restart_after_compound_chain_repair_under_budget``),
-> the **first milestone to operationalise chain-then-restart-aware
-> Plane A↔B handoff promotion**, and the **first milestone to
-> expose a content-addressed per-turn compound-chain-then-restart
-> trajectory CID** unifying all twelve W75 primitives + the new
-> restart-after-compound-chain-repair window into a single
-> dominant signal. ``coordpy.tiny_substrate_v21`` ships 23 layers
-> + three new V21 axes (per-turn compound-chain-then-restart
-> trajectory CID, per-layer chain-then-restart-length label, per-
-> layer chain-then-restart-pressure gate).
-> ``coordpy.multi_agent_substrate_coordinator_v12`` ships 26
-> policies + the new 16th regime.
-> ``coordpy.team_consensus_controller_v11`` ships the two new
-> V11 arbiters. ``coordpy.hosted_real_handoff_coordinator_v8`` is
-> the eleventh-decision handoff coordinator with chain-then-
-> restart-aware promotion + restart-after-compound-chain-repair
-> fallback. ``coordpy.hosted_provider_filter_v8`` is the chain-
-> then-restart-aware provider filter. R-185..R-188 four families
-> × 4 seed sets pass 296/296 cells. **Public SDK contract is
-> byte-for-byte unchanged: ``coordpy.__version__ == "0.5.20"``,
+> **Latest milestone marker (post-W76 / W77, 2026-05-17 —
+> Stronger Replacement-After-Restart-After-Compound-Chain-Repair
+> / Post-Restart-Replacement Budget-Primary Two-Plane Multi-Agent
+> Substrate Programme, thirty-fifth post-release research
+> milestone — twenty-second substrate-attack milestone and
+> **thirteenth** multi-agent task-success-bearing substrate
+> milestone (the first to win across **seventeen** regimes —
+> W76's sixteen plus
+> ``replacement_after_restart_after_compound_chain_repair_under_budget``),
+> the **first milestone to operationalise post-restart-
+> replacement-aware Plane A↔B handoff promotion**, and the
+> **first milestone to expose a content-addressed per-turn
+> replacement-after-restart-after-compound-chain trajectory CID**
+> unifying all thirteen W76 primitives + the new post-restart-
+> replacement window into a single dominant signal.
+> ``coordpy.tiny_substrate_v22`` inherits V21's 23 physical
+> layers + three new V22 substrate axes (per-turn replacement-
+> after-restart-after-compound-chain trajectory CID, per-layer
+> post-restart-replacement length label, per-layer post-restart-
+> replacement-pressure gate).
+> ``coordpy.multi_agent_substrate_coordinator_v13`` ships 28
+> policies + the new 17th regime.
+> ``coordpy.team_consensus_controller_v12`` ships the two new
+> V12 arbiters. ``coordpy.hosted_real_handoff_coordinator_v9`` is
+> the twelfth-decision handoff coordinator with post-restart-
+> replacement-aware promotion + replacement-after-restart-after-
+> compound-chain-repair fallback. ``coordpy.hosted_provider_filter_v9``
+> is the post-restart-replacement-aware provider filter.
+> R-189..R-192 four families × 4 seed sets pass cleanly.
+> **Public SDK contract is byte-for-byte unchanged:
+> ``coordpy.__version__ == "0.5.20"``,
 > ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No PyPI
 > release.**
+
+> **Earlier milestone marker (post-W75 / W76, 2026-05-17 —
+> Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-
+> Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate
+> Programme):** see W76 entry below for full details. R-185..R-188
+> 296/296 cells pass. **No version bump. No PyPI release.**
 
 > **Earlier milestone marker (post-W74 / W75, 2026-05-17 —
 > Stronger Compound-Chain-Repair / Replacement-Then-Delayed-Repair-

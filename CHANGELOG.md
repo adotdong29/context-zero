@@ -13,6 +13,69 @@ re-exported through `coordpy.__init__` or
 `coordpy.SDK_VERSION == "coordpy.sdk.v3.43"`, the smoke driver,
 the public symbols) is byte-for-byte unchanged.
 
+- **W77 Stronger Replacement-After-Restart-After-Compound-Chain-
+  Repair / Post-Restart-Replacement Budget-Primary Two-Plane
+  Multi-Agent Substrate Programme** (post-W76, 2026-05-17) —
+  *twenty-second substrate-attack milestone; thirteenth **multi-
+  agent task-success-bearing** substrate milestone (first to win
+  across **seventeen** regimes: W76's sixteen plus
+  ``replacement_after_restart_after_compound_chain_repair_under_budget``);
+  first milestone to **operationalise post-restart-replacement-
+  aware Plane A↔B handoff promotion** and the **first milestone
+  to expose a content-addressed per-turn replacement-after-
+  restart-after-compound-chain trajectory CID** that unifies all
+  thirteen W76 primitives + the new post-restart-replacement
+  window into a single dominant signal back into the substrate-
+  routed policy*. Nineteen orthogonal advances on top of W76 (12
+  Plane B v-bumps + 5 Plane A V10 + 1 new post-restart-
+  replacement-aware handoff coordinator V9 + 1 new post-restart-
+  replacement-aware provider filter V9). Plane B: (M1) **Tiny
+  Substrate V22** (inherits V21's 23 physical layers + three new
+  V22 substrate axes — per-turn replacement-after-restart-after-
+  compound-chain-trajectory CID, per-layer replacement-after-
+  restart-after-compound-chain-length label in [0..13], per-
+  layer post-restart-replacement-pressure gate); (M2) **KV
+  Bridge V22** (eighteen-target stacked ridge + 148-dim post-
+  restart-replacement fingerprint + post-restart-replacement-
+  pressure falsifier); (M3) **Cache Controller V20** (seventeen-
+  objective stacked ridge + per-role 18-dim post-restart-
+  replacement-pressure head); (M4) **Replay Controller V18**
+  (twenty-five regimes + fifteen-way post-restart-replacement-
+  aware routing head); (M5) **Deep Substrate Hybrid V22**
+  (twenty-two-way bidirectional loop); (M6) **Substrate Adapter
+  V22** with new ``substrate_v22_full`` tier; (M7) **Persistent
+  V29** (28 layers, max_chain_walk_depth=16777216, twenty-sixth
+  persistent skip carrier); (M8) **LHR V29** (28 heads,
+  max_k=1024, nineteen-layer scorer); (M9) **MLSC V25** (post-
+  restart-replacement-trajectory + post-restart-replacement-
+  window chains); (M10) **Consensus V23** (40-stage chain);
+  (M11) **MASC V13** (28-policy, 17-regime); (M12) **TCC V12**
+  (post-restart-replacement-pressure + post-restart-replacement-
+  trajectory arbiters). Plane A V10: (H1) **Hosted Router V10**
+  (post-restart-replacement-pressure weighting + post-restart-
+  replacement-after-PCR match table); (H2) **Hosted Logprob V10**
+  (post-restart-replacement-aware abstain floor + 8-pressure
+  tiebreak); (H3) **Hosted Cache-Aware Planner V10** (eight-
+  layer rotated; ≥ 89 % savings on 20×8 at hit_rate=1.0); (H4)
+  **Hosted Cost Planner V10** (cost-per-post-restart-replacement-
+  success-under-budget + abstain-when-post-restart-replacement-
+  pressure-violated); (H5) **Wall V10** (43 blocked axes at
+  hosted surface); (H6) **Handoff Coordinator V9** (post-restart-
+  replacement-aware promotion + replacement-after-restart-after-
+  compound-chain-repair fallback; ≥ 86 % cross-plane savings);
+  (H7) **Provider Filter V9** (post-restart-replacement-aware
+  drop). Adds benchmark families ``coordpy.r189_benchmark``
+  (Plane A V10; 10 H-bars), ``coordpy.r190_benchmark`` (Plane B
+  V22; 14 H-bars), ``coordpy.r191_benchmark`` (multi-agent task
+  success across 17 regimes; 36 H-bars), and
+  ``coordpy.r192_benchmark`` (handoff V9 + falsifier + limitation
+  reproductions; 14 H-bars), totalling 74 H-bars × 4 seed sets =
+  296 cells, all pass. One new closed-form linear ridge solve on
+  top of W76's 76 (KV V22 eighteen-target), total **77 ridge
+  solves across W61..W77**. ``W77_FAILURE_MODES`` enumerates **54
+  disjoint failure modes** (cumulative ≥ 1895 across W22..W77).
+  ``coordpy.w77_team`` orchestrator. **No version bump. No PyPI
+  release.**
 - **W76 Stronger Restart-After-Compound-Chain-Repair / Compound-
   Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
   Substrate Programme** (post-W75, 2026-05-17) — *twenty-first
