@@ -13,6 +13,67 @@ re-exported through `coordpy.__init__` or
 `coordpy.SDK_VERSION == "coordpy.sdk.v3.43"`, the smoke driver,
 the public symbols) is byte-for-byte unchanged.
 
+- **W76 Stronger Restart-After-Compound-Chain-Repair / Compound-
+  Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
+  Substrate Programme** (post-W75, 2026-05-17) — *twenty-first
+  substrate-attack milestone; twelfth **multi-agent task-success-
+  bearing** substrate milestone (first to win across **sixteen**
+  regimes: W75's fifteen plus
+  ``restart_after_compound_chain_repair_under_budget``); first
+  milestone to **operationalise chain-then-restart-aware Plane
+  A↔B handoff promotion** and the **first milestone to expose a
+  content-addressed per-turn compound-chain-then-restart
+  trajectory CID** that unifies all twelve W75 primitives + the
+  new post-compound-chain-restart window into a single dominant
+  signal back into the substrate-routed policy*. Nineteen
+  orthogonal advances on top of W75 (12 Plane B v-bumps + 5 Plane
+  A V9 + 1 new chain-then-restart-aware handoff coordinator V8 +
+  1 new chain-then-restart-aware provider filter V8). Plane B:
+  (M1) **Tiny Substrate V21** (23 layers; three new V21 axes —
+  per-turn compound-chain-then-restart-trajectory CID, per-layer
+  chain-then-restart-length label in [0..12], per-layer chain-
+  then-restart-pressure gate); (M2) **KV Bridge V21** (seventeen-
+  target stacked ridge + 140-dim chain-then-restart fingerprint
+  + chain-then-restart-pressure falsifier); (M3) **Cache
+  Controller V19** (sixteen-objective stacked ridge + per-role
+  17-dim chain-then-restart-pressure head); (M4) **Replay
+  Controller V17** (twenty-four regimes + fourteen-way chain-
+  then-restart-aware routing head); (M5) **Deep Substrate
+  Hybrid V21** (twenty-one-way bidirectional loop); (M6)
+  **Substrate Adapter V21** with new ``substrate_v21_full`` tier;
+  (M7) **Persistent V28** (27 layers, max_chain_walk_depth=
+  8388608, twenty-fifth persistent skip carrier); (M8) **LHR
+  V28** (27 heads, max_k=960, eighteen-layer scorer); (M9)
+  **MLSC V24** (chain-then-restart-trajectory + post-compound-
+  chain-restart chains); (M10) **Consensus V22** (38-stage
+  chain); (M11) **MASC V12** (26-policy, 16-regime); (M12)
+  **TCC V11** (chain-then-restart-pressure + post-compound-
+  chain-restart-after-RTR arbiters). Plane A V9: (H1) **Hosted
+  Router V9** (chain-then-restart-pressure weighting + chain-
+  then-restart-after-RTR match table); (H2) **Hosted Logprob V9**
+  (chain-then-restart-aware abstain floor + 7-pressure tiebreak);
+  (H3) **Hosted Cache-Aware Planner V9** (seven-layer rotated;
+  ≥ 88 % savings on 20×8 at hit_rate=1.0); (H4) **Hosted Cost
+  Planner V9** (cost-per-chain-then-restart-success-under-budget
+  + abstain-when-chain-then-restart-pressure-violated); (H5)
+  **Wall V9** (40 blocked axes at hosted surface); (H6) **Handoff
+  Coordinator V8** (chain-then-restart-aware promotion + restart-
+  after-compound-chain-repair fallback; ≥ 85 % cross-plane
+  savings); (H7) **Provider Filter V8** (chain-then-restart-
+  aware drop). Adds benchmark families
+  ``coordpy.r185_benchmark`` (Plane A V9; 10 H-bars),
+  ``coordpy.r186_benchmark`` (Plane B V21; 16 H-bars),
+  ``coordpy.r187_benchmark`` (multi-agent task success across
+  16 regimes; 34 H-bars), and ``coordpy.r188_benchmark``
+  (handoff V8 + falsifier + limitation reproductions; 14 H-bars),
+  totalling 74 H-bars × 4 seed sets = 296 cells, all pass. Three
+  new closed-form linear ridge solves on top of W75's 73 (KV V21
+  seventeen-target + cache V19 sixteen-objective + replay V17
+  chain-then-restart-aware routing), total **76 ridge solves
+  across W61..W76**. ``W76_FAILURE_MODES`` enumerates **55
+  disjoint failure modes** (cumulative ≥ 1841 across W22..W76).
+  ``coordpy.w76_team`` orchestrator. **No version bump. No PyPI
+  release.**
 - **W75 Stronger Compound-Chain-Repair / Replacement-Then-Delayed-
   Repair-Then-Rejoin Budget-Primary Two-Plane Multi-Agent Substrate
   Programme** (post-W74, 2026-05-17) — *twentieth substrate-attack

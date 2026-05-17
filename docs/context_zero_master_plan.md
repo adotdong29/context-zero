@@ -1,6 +1,36 @@
 # Context-Zero — Master Plan
 
-> **Latest milestone marker (post-W74 / W75, 2026-05-17 —
+> **Latest milestone marker (post-W75 / W76, 2026-05-17 —
+> Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-
+> Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate
+> Programme, thirty-fourth post-release research milestone —
+> twenty-first substrate-attack milestone and **twelfth** multi-
+> agent task-success-bearing substrate milestone (the first to win
+> across **sixteen** regimes — W75's fifteen plus
+> ``restart_after_compound_chain_repair_under_budget``),
+> the **first milestone to operationalise chain-then-restart-aware
+> Plane A↔B handoff promotion**, and the **first milestone to
+> expose a content-addressed per-turn compound-chain-then-restart
+> trajectory CID** unifying all twelve W75 primitives + the new
+> restart-after-compound-chain-repair window into a single
+> dominant signal. ``coordpy.tiny_substrate_v21`` ships 23 layers
+> + three new V21 axes (per-turn compound-chain-then-restart
+> trajectory CID, per-layer chain-then-restart-length label, per-
+> layer chain-then-restart-pressure gate).
+> ``coordpy.multi_agent_substrate_coordinator_v12`` ships 26
+> policies + the new 16th regime.
+> ``coordpy.team_consensus_controller_v11`` ships the two new
+> V11 arbiters. ``coordpy.hosted_real_handoff_coordinator_v8`` is
+> the eleventh-decision handoff coordinator with chain-then-
+> restart-aware promotion + restart-after-compound-chain-repair
+> fallback. ``coordpy.hosted_provider_filter_v8`` is the chain-
+> then-restart-aware provider filter. R-185..R-188 four families
+> × 4 seed sets pass 296/296 cells. **Public SDK contract is
+> byte-for-byte unchanged: ``coordpy.__version__ == "0.5.20"``,
+> ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No PyPI
+> release.**
+
+> **Earlier milestone marker (post-W74 / W75, 2026-05-17 —
 > Stronger Compound-Chain-Repair / Replacement-Then-Delayed-Repair-
 > Then-Rejoin Budget-Primary Two-Plane Multi-Agent Substrate
 > Programme, thirty-third post-release research milestone —

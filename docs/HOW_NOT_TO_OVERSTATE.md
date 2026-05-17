@@ -2,10 +2,63 @@
 
 > Canonical do-not-overstate rules for the Context Zero / CoordPy
 > programme. Every milestone note, paper draft, README claim, or
-> README-of-README must satisfy these rules. Last touched: post-W74
-> W75 milestone (Stronger Compound-Chain-Repair / Replacement-Then-
-> Delayed-Repair-Then-Rejoin Budget-Primary Two-Plane Multi-Agent
+> README-of-README must satisfy these rules. Last touched: post-W75
+> W76 milestone (Stronger Restart-After-Compound-Chain-Repair /
+> Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
 > Substrate Programme research line), 2026-05-17.
+
+## W76 (Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate Programme) — explicit do-not-overstate rules
+
+The W76 milestone introduces the V21 substrate (23 layers + three
+new V21 axes), the twenty-six-policy MASC V12 across sixteen
+regimes, the TCC V11, the hosted control plane V9 modules, the
+new **chain-then-restart-aware hosted-real handoff coordinator
+V8** that adds chain-then-restart-aware promotion + restart-
+after-compound-chain-repair fallback decision, and the new
+**chain-then-restart-aware provider filter V8**. Honest reading:
+
+* W76 is a single-step extension of W75. V21 strictly extends V20
+  (does not replace it). All fifteen W75 regimes remain load-
+  bearing; W76 adds exactly one new regime
+  (``restart_after_compound_chain_repair_under_budget``).
+* V21 wins are in-repo synthetic. The 100 % strict-beat rate of
+  V21 over V20 across sixteen regimes is measured *inside* the
+  deterministic MASC V12 harness. It is NOT a real-model multi-
+  agent task win. ``W76-L-MASC-V12-SYNTHETIC-CAP``.
+* The chain-then-restart-trajectory CID proves integrity only at
+  the in-repo substrate. The hosted surface does not see it.
+  ``W76-L-CHAIN-THEN-RESTART-IN-REPO-CAP``.
+* The hosted plane V9 does NOT pierce the wall. ≥ 40 blocked
+  axes at the hosted surface (W75's 37 + 3 new V21 axes).
+  ``W76-L-HOSTED-V9-NO-SUBSTRATE-CAP``.
+* Frontier-model substrate access remains the unsolved wall.
+  W76 carries the W70 frontier_blocked_axes set forward
+  unchanged. ``W76-L-NO-THIRD-PARTY-SUBSTRATE-COUPLING-CAP``.
+* The handoff V8 coordinator preserves the wall as a content-
+  addressed invariant. ``W76-L-HANDOFF-V8-NOT-CROSSING-WALL-
+  CAP``.
+* Chain-then-restart pressure is caller-declared; the substrate
+  reads it as an input. ``W76-L-CHAIN-THEN-RESTART-PRESSURE-
+  DECLARED-CAP``.
+* All hosted V9 scores (success, quality, budget, pressures
+  including chain-then-restart) are caller-declared; the router
+  does NOT measure live success. ``W76-L-HOSTED-V9-DECLARED-
+  CAP``.
+* All ridge solves are closed-form linear; no SGD / autograd /
+  GPU. 76 ridge solves total across W61..W76. ``W76-L-V21-NO-
+  AUTOGRAD-CAP``.
+* No version bump. No PyPI release. ``coordpy.__version__ ==
+  "0.5.20"`` and ``SDK_VERSION == "coordpy.sdk.v3.43"`` byte-
+  for-byte unchanged.
+
+When describing W76 outcomes:
+- Say "V21 strictly beats V20 in the synthetic MASC V12 harness
+  across all sixteen regimes", NOT "V21 wins on real models".
+- Say "chain-then-restart-aware handoff V8 saves ≥ 85 % visible
+  tokens vs forcing every turn through hosted_only at default
+  config", NOT "handoff V8 saves 85 % vs hosted in production".
+- Say "boundary V9 enumerates 40 blocked axes at the hosted
+  surface", NOT "hosted APIs now expose 40 fewer blocked axes".
 
 ## W75 (Stronger Compound-Chain-Repair / Replacement-Then-Delayed-Repair-Then-Rejoin Budget-Primary Two-Plane Multi-Agent Substrate Programme) — explicit do-not-overstate rules
 

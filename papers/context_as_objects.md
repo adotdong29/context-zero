@@ -2,9 +2,49 @@
 
 > Main paper draft for the Context Zero programme.
 >
-> **Post-W74 research-line update (W75 Stronger Compound-Chain-
-> Repair / Replacement-Then-Delayed-Repair-Then-Rejoin Budget-
+> **Post-W75 research-line update (W76 Stronger Restart-After-
+> Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-
 > Primary Two-Plane Multi-Agent Substrate Programme, 2026-05-17).**
+> *Twenty-first substrate-attack milestone, and the **twelfth**
+> multi-agent task-success-bearing substrate milestone in the
+> programme — the first to produce wins across **sixteen**
+> failure-mode regimes (W75's fifteen plus
+> **restart_after_compound_chain_repair_under_budget**),
+> the **first milestone to operationalise chain-then-restart-aware
+> Plane A↔B handoff promotion**, and the **first milestone to
+> expose a content-addressed per-turn compound-chain-then-restart
+> trajectory CID** that unifies all twelve W75 primitives + the
+> new restart-after-compound-chain-repair window
+> (**restart-after-compound-chain-repair**) into a single dominant
+> signal back into the substrate-routed policy.
+> ``MultiAgentSubstrateCoordinatorV12`` runs **twenty-six**
+> policies (W75's twenty-four plus ``substrate_routed_v21`` and
+> ``team_substrate_coordination_v21``) across **sixteen** regimes
+> and verifies that the V21 substrate-routed and TSC_V21 team-
+> substrate-coordination policies strictly beat the V20 and
+> TSC_V20 baselines on ≥ 50 % of seeds in every regime (100 % in
+> practice across all sixteen regimes). The new compound-chain-
+> then-restart-aware hosted ↔ real handoff coordinator V8
+> records per-turn V8 envelopes that promote any turn with
+> ``compound_chain_then_restart_pressure ≥ 0.5`` to Plane B with
+> ``compound_chain_then_restart_alignment = 1.0`` and adds a
+> new eleventh decision label
+> (``restart_after_compound_chain_repair_fallback``), exposes a
+> chain-then-restart falsifier, and saves ≥ 85 % visible tokens
+> vs forcing every turn through ``hosted_only``. The new chain-
+> then-restart-aware provider filter V8 drops providers whose
+> declared chain-then-restart-noise score exceeds their per-
+> provider cap under high chain-then-restart pressure. The W76
+> envelope verifier enumerates **55 disjoint failure modes** and
+> the cumulative trust boundary across W22..W76 now sits at
+> **≥ 1841 enumerated failure modes**. Public SDK contract is
+> byte-for-byte unchanged: ``coordpy.__version__ == "0.5.20"`` /
+> ``SDK_VERSION == "coordpy.sdk.v3.43"``. No PyPI release.
+>
+> **Earlier post-W74 research-line update (W75 Stronger Compound-
+> Chain-Repair / Replacement-Then-Delayed-Repair-Then-Rejoin
+> Budget-Primary Two-Plane Multi-Agent Substrate Programme,
+> 2026-05-17).**
 > *Twentieth substrate-attack milestone, and the **eleventh**
 > multi-agent task-success-bearing substrate milestone in the
 > programme — the first to produce wins across **fifteen**

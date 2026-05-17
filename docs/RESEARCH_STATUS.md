@@ -5,10 +5,146 @@
 > doc on what is *true now*, this file is right and the other file
 > is stale. For *theorem-by-theorem* status, see
 > `docs/THEOREM_REGISTRY.md`. For *what may be claimed*, see
-> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W74 W75
-> milestone (Stronger Compound-Chain-Repair / Replacement-Then-
-> Delayed-Repair-Then-Rejoin Budget-Primary Two-Plane Multi-Agent
+> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W75 W76
+> milestone (Stronger Restart-After-Compound-Chain-Repair /
+> Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent
 > Substrate Programme research line), 2026-05-17.
+
+## TL;DR — W76 Stronger Restart-After-Compound-Chain-Repair / Compound-Chain-Then-Restart Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W75 research milestone)
+
+The programme now has **seventy-three** coupled research axes.
+W76 mints axis 73: the **twenty-first substrate-attack
+milestone**, the **twelfth multi-agent task-success-bearing**
+substrate milestone (first to win across *sixteen* regimes: W75's
+fifteen + **restart_after_compound_chain_repair_under_budget**),
+the **first milestone to operationalise chain-then-restart-aware
+Plane A↔B handoff promotion**, and the **first milestone to
+expose a content-addressed per-turn compound-chain-then-restart
+trajectory CID** that unifies all twelve W75 primitives + the
+new restart-after-compound-chain-repair window into a single
+dominant signal back into the substrate-routed policy.
+
+The load-bearing W76 win is **MASC V12 / TCC V11 +
+tiny_substrate_v21 + 11 supporting Plane B V21 modules + 5 Plane A
+V9 modules + the new chain-then-restart-aware handoff coordinator
+V8 + the new chain-then-restart-aware provider filter V8**: V21
+strictly beats V20 on ≥ 50 % of seeds in every regime (100 % in
+practice across all sixteen regimes — verified at 5 seeds × 3
+seed sets = 15 seeds per regime), and TSC_V21 strictly beats
+TSC_V20 on ≥ 50 % of seeds in every regime (100 % in practice).
+Plus an honest **hosted control plane V9** (Plane A V9):
+HostedRouterControllerV9 (chain-then-restart-pressure weighting
++ chain-then-restart-after-RTR match table),
+HostedLogprobRouterV9 (chain-then-restart-aware abstain floor
+lowered under high chain-then-restart pressure + 7-pressure
+tiebreak), HostedCacheAwarePlannerV9 (seven-layer rotated;
+≥ 88 % savings on 20 × 8 at hit_rate=1.0), HostedCostPlannerV9
+(cost-per-chain-then-restart-success-under-budget +
+abstain-when-chain-then-restart-pressure-violated), and the
+**explicit wall V9** HostedRealSubstrateBoundaryV9 that
+enumerates 40 blocked axes at the hosted surface (W75's 37 + 3
+new V21 axes) and carries forward the W70 frontier_blocked_axes
+set unchanged. The new **chain-then-restart-aware Plane A↔B
+handoff coordinator V8** records per-turn V8 envelopes that
+promote any turn with ``compound_chain_then_restart_pressure
+≥ 0.5`` to Plane B (with
+``compound_chain_then_restart_alignment = 1.0``) and adds an
+eleventh decision (``restart_after_compound_chain_repair_
+fallback``) on top of V7's ten, exposes a chain-then-restart
+falsifier, and saves ≥ 85 % visible tokens vs forcing every
+turn through hosted_only (≥ 88 % at default config). Plus the
+new chain-then-restart-aware **provider filter V8** that drops
+providers whose declared chain-then-restart-noise score exceeds
+their per-provider cap under high chain-then-restart pressure.
+
+**Nineteen orthogonal advances** on top of W75 (12 Plane B
+v-bumps + 5 Plane A V9 + 1 new handoff coordinator V8 + 1 new
+provider filter V8). Plane B headlines: V21 substrate (23
+layers; three new V21 axes — per-turn compound-chain-then-
+restart-trajectory CID, per-layer chain-then-restart-length
+label, per-layer chain-then-restart-pressure gate); KV V21
+seventeen-target stacked ridge + 140-dim chain-then-restart
+fingerprint + chain-then-restart-pressure falsifier; Cache V19
+sixteen-objective stacked ridge + per-role 17-dim chain-then-
+restart-pressure head; Replay V17 twenty-four-regime ridge +
+fourteen-way chain-then-restart-aware routing head; Deep
+Substrate Hybrid V21 twenty-one-way loop; Substrate Adapter
+V21 with ``substrate_v21_full`` tier; Persistent V28 (27
+layers, max_chain_walk_depth=8388608, twenty-fifth skip
+carrier); LHR V28 (27 heads, max_k=960, eighteen-layer scorer);
+MLSC V24 (chain-then-restart-trajectory + post-compound-chain-
+restart chains); Consensus V22 (38 stages); MASC V12 (26-
+policy, 16-regime); TCC V11 (chain-then-restart-pressure +
+post-compound-chain-restart-after-RTR arbiters).
+
+W76 fits **three** new closed-form ridge solves on top of W75's
+73 (cache V19 sixteen-objective + replay V17 chain-then-
+restart-aware-routing + KV V21 seventeen-target — the cache V19
+per-role chain-then-restart-pressure head re-uses the V18
+family solver). Total **76 closed-form ridge solves across
+W61..W76**. No autograd, no SGD, no GPU. The benchmark sweep is
+**280 cells across 4 benchmark families × 4 seed sets**
+(R-185 hosted control plane V9 (10 H-bars), R-186 real
+substrate plane V21 (16 H-bars), R-187 multi-agent task success
+across 16 regimes (34 H-bars), R-188 handoff V8 + falsifier +
+limitation reproductions (14 H-bars) — 74 H-bars × 4 seed sets
+= 296 cells), 296/296 cells pass.
+
+The W76 envelope verifier enumerates **55 disjoint failure
+modes** (cumulative trust boundary across W22..W76 ≥ 1841
+enumerated failure modes). Ships at ``coordpy.tiny_substrate_v21``,
+``coordpy.kv_bridge_v21``, ``coordpy.cache_controller_v19``,
+``coordpy.replay_controller_v17``,
+``coordpy.deep_substrate_hybrid_v21``,
+``coordpy.substrate_adapter_v21``,
+``coordpy.persistent_latent_v28``,
+``coordpy.long_horizon_retention_v28``,
+``coordpy.mergeable_latent_capsule_v24``,
+``coordpy.consensus_fallback_controller_v22``,
+``coordpy.multi_agent_substrate_coordinator_v12``,
+``coordpy.team_consensus_controller_v11``, ``coordpy.w76_team``,
+plus the Plane A V9 modules
+``coordpy.hosted_router_controller_v9``,
+``coordpy.hosted_logprob_router_v9``,
+``coordpy.hosted_cache_aware_planner_v9``,
+``coordpy.hosted_cost_planner_v9``,
+``coordpy.hosted_real_substrate_boundary_v9``,
+``coordpy.hosted_real_handoff_coordinator_v8``,
+``coordpy.hosted_provider_filter_v8``, and benchmarks
+``coordpy.r185_benchmark`` / ``coordpy.r186_benchmark`` /
+``coordpy.r187_benchmark`` / ``coordpy.r188_benchmark``. **Public
+SDK contract is byte-for-byte unchanged:
+``coordpy.__version__ == "0.5.20"``,
+``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``.**
+
+Honest scope (do-not-overstate):
+
+* W76 keeps the W70 two-plane split and *adds* the chain-then-
+  restart-aware handoff V8; it does NOT dissolve the wall.
+  Hosted backends remain text-only at the HTTP surface.
+  ``W76-L-HOSTED-V9-NO-SUBSTRATE-CAP``.
+* The sixteen-regime multi-agent wins are measured inside the
+  in-repo synthetic MASC V12 harness.
+  ``W76-L-MASC-V12-SYNTHETIC-CAP``.
+* Frontier-model substrate access remains the unsolved
+  research-line wall — W76 carries the W70
+  frontier_blocked_axes set forward unchanged.
+  ``W76-L-NO-THIRD-PARTY-SUBSTRATE-COUPLING-CAP``.
+* The chain-then-restart-trajectory CID is computed from byte-
+  stable V20 compound-chain-repair-trajectory CID + recorded
+  post-compound-chain-restart windows only. It does NOT prove
+  chain-then-restart integrity at the hosted surface
+  (``W76-L-CHAIN-THEN-RESTART-IN-REPO-CAP``).
+* The chain-then-restart-pressure gate is a calibrated weighted
+  combination, not a learned end-to-end controller
+  (``W76-L-CHAIN-THEN-RESTART-PRESSURE-DECLARED-CAP``).
+* Hosted V9 success scores, quality scores, budgets, and all
+  pressures including chain-then-restart pressure are caller-
+  declared. The router does not measure live success
+  (``W76-L-HOSTED-V9-DECLARED-CAP``).
+* The handoff V8 coordinator preserves the wall as a content-
+  addressed invariant (``W76-L-HANDOFF-V8-NOT-CROSSING-WALL-
+  CAP``).
 
 ## TL;DR — W75 Stronger Compound-Chain-Repair / Replacement-Then-Delayed-Repair-Then-Rejoin Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W74 research milestone)
 
