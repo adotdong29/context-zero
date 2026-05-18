@@ -5,11 +5,87 @@
 > doc on what is *true now*, this file is right and the other file
 > is stale. For *theorem-by-theorem* status, see
 > `docs/THEOREM_REGISTRY.md`. For *what may be claimed*, see
-> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W79 W80
-> milestone (Frontier-Quality Local Runtime / Runtime
-> Instrumentation Contract / Second-Backend Parity Matrix /
-> Living Capability Matrix / Live Local-Model Evaluation —
-> P0-blocker attack), 2026-05-18.
+> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W80 W81
+> milestone (Deployable Substrate Gateway / Sequence-Conditioned
+> Learned Consolidation / Learned Multi-Runtime Economics /
+> Differentiable Memory Substrate / Adversarial Consensus &
+> Repair — P1-blocker attack), 2026-05-18.
+
+## TL;DR — W81 P1-Blocker Attack (post-W80 research milestone)
+
+W80 closed the **five P0-blocker meta-issues** (#5, #6, #8, #12,
+#17). W81 now closes the **five P1-blocker meta-issues** (#7,
+#9, #14, #19, #20) from the same meta backlog (issue #4),
+following the recommended phase-2/phase-3 sequencing:
+
+1. **Deployable substrate gateway V1**
+   (``coordpy.deployable_substrate_gateway_v1``) — closes
+   **#7**. The W79 in-process façade is now a deployable
+   gateway with `http.server`-backed TCP transport,
+   OpenAI-compatible `/v1/chat/completions` and
+   `/v1/completions` routes, and explicit substrate side-channel
+   endpoints (`/v1/substrate/forward`, `/v1/substrate/replay`,
+   `/v1/substrate/conformance`, `/v1/substrate/capabilities`).
+   Every request and response is content-addressed; an
+   `Authorization: Bearer <token>` auth shim locks the
+   gateway down for research deployment. End-to-end bench
+   routes chat completion + substrate forward + replay +
+   conformance through the gateway and reports a single
+   content-addressed audit CID.
+2. **Sequence-conditioned learned consolidation V2**
+   (``coordpy.learned_consolidation_v2``) — closes **#9**.
+   The W79 V1 pointwise nonlinear head is upgraded to a real
+   recurrent state-space model (``h_t = tanh(W_h h_{t-1} +
+   W_x x_t + b)``) with a learned read/reconstruct head,
+   trained end-to-end via NumPy-only backprop-through-time
+   on a synthetic temporal-integration dataset. V2 strictly
+   beats closed-form ridge, V1 pointwise nonlinear, and a
+   k=2 bounded-window ridge baseline on the sequential
+   reconstruction task.
+3. **Learned multi-runtime economics controller V1**
+   (``coordpy.learned_economics_controller_v1``) — closes
+   **#14**. A 2-layer softmax-policy network learns a
+   distribution over 5 canonical economics actions
+   (``replay``, ``runtime_recompute``, ``transcript_recompute``,
+   ``promote_to_richer_substrate``, ``abstain``) given a 7-dim
+   feature vector (horizon, budget pressure, evidence
+   completeness, prior failure rate, cache freshness, task
+   difficulty, runtime health). Trained supervised on a
+   synthetic optimal-action dataset. The learned controller
+   strictly beats the hand-built heuristic baseline on mean
+   utility AND has a smaller optimality gap vs the
+   simulation's ground-truth optimum.
+4. **Differentiable memory substrate V1**
+   (``coordpy.differentiable_memory_substrate_v1``) — closes
+   **#19**. A learned dynamical line beyond the ridge-heavy
+   outer controllers: a state-space recurrent core combined
+   with ``K`` content-addressable memory slots (softmax read
+   attention, sigmoid-gated write), trained end-to-end with
+   analytical NumPy gradients. On a delayed-recall task where
+   targets depend on inputs at a fixed lag, V1 with slots
+   strictly beats both V2 (single recurrent state, smaller
+   hidden_dim) and closed-form pointwise ridge.
+5. **Adversarial consensus & repair V1**
+   (``coordpy.adversarial_consensus_repair_v1``) — closes
+   **#20**. A principled trust-weighted evidence-fusion line:
+   exponential delay-decay prior trust, corruption-suspicion
+   penalty, bootstrap confidence interval, and four canonical
+   decision kinds (``commit``, ``abstain``,
+   ``escalate_to_richer_substrate``, ``replay_from_trusted``).
+   On the adversarial bench (n=7 witnesses, f=2 adversarial,
+   80 seeds), V1 strictly beats naive averaging on mean error
+   AND wins on ≥ 80% of seeds. V1 is also competitive with
+   the median (a strong robust baseline) while additionally
+   providing explicit abstain/escalate/replay routing.
+
+W81 is *strictly additive* against the W80 baseline. All
+existing W56..W80 modules, tests, and theorems are unmodified;
+the W79 baseline (28/28) and W80 baseline (12/12 runtime
+instrumentation + parity, plus 8/8 substrate adapter V25) all
+stay green. **Test count delta**: +66 new tests
+(18 gateway + 10 consolidation V2 + 14 economics + 11
+differentiable memory + 12 adversarial consensus + 1 dataset
+sanity check), all passing on Python 3.11 with NumPy.
 
 ## TL;DR — W80 P0-Blocker Attack (post-W79 research milestone)
 
