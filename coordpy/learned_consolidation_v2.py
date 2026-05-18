@@ -725,3 +725,112 @@ def emit_seq_consolidation_v2_witness(
         n_train_steps=int(module.n_train_steps),
         last_train_loss=float(module.last_train_loss),
     )
+
+
+# ---------------------------------------------------------------
+# Integration adapter: plug V2 into the W79 long-horizon
+# reconstruction carrier (`long_horizon_reconstruction_substrate_v2`).
+# ---------------------------------------------------------------
+#
+# The W79 LHR carrier V2 declares a ``learned_slots`` field of
+# ``LearnedConsolidationSlotV2`` objects, populated by V1's
+# pointwise head via ``LongHorizonReconstructionCarrierV2.from_v1``.
+# To satisfy P1 #9's "plugs into the reconstruction / replay /
+# retention stack" requirement, V2 here exposes
+# ``build_v2_carrier_slots`` — given a sequence-conditioned
+# V2 module and a list of carrier entries, it runs V2's
+# recurrent forward over a temporally-ordered feature
+# projection of the entries and emits one
+# ``LearnedConsolidationSlotV2`` per entry, content-addressed
+# on the V2 module's CID and the entry's turn_index.
+#
+# Result: the W79 LHR carrier's ``learned_slots`` can be
+# populated from V2 in place of V1, with no schema change.
+
+def build_v2_carrier_slots(
+        *,
+        module: SequenceConditionedConsolidationModuleV2,
+        carrier_entries: Sequence[Any],
+) -> "list[Any]":
+    """Produce ``LearnedConsolidationSlotV2`` records from a V2 run.
+
+    The V2 module runs its recurrent forward over the
+    carrier-entry sequence (one timestep per entry), and each
+    timestep's prediction becomes a content-addressed slot.
+    Returns a list of slots in entry order; the caller can
+    plug them directly into a
+    ``LongHorizonReconstructionCarrierV2`` via the existing
+    schema (the V2 slot dataclass is the same shape).
+
+    The feature for entry ``i`` is a deterministic projection
+    of the entry's ``turn_index``: a small sinusoidal feature
+    vector. This matches the projection rule in the W79
+    ``LongHorizonReconstructionCarrierV2.from_v1`` so the
+    integration is byte-stable.
+    """
+    from .long_horizon_reconstruction_substrate_v2 import (
+        LearnedConsolidationSlotV2,
+    )
+    import math
+    B = int(len(carrier_entries))
+    if B == 0:
+        return []
+    D_in = int(module.input_dim)
+    D_out = int(module.output_dim)
+    X = _np.zeros((B, D_in), dtype=_np.float64)
+    for i, e in enumerate(carrier_entries):
+        ti = float(getattr(e, "turn_index", i))
+        for d in range(D_in):
+            X[i, d] = (
+                math.sin(ti * (0.1 + 0.07 * d))
+                + 0.05 * float(d))
+    _, _, Y = module.forward_sequence(X)
+    slots: list[Any] = []
+    for i, e in enumerate(carrier_entries):
+        payload_cid = _sha256_hex({
+            "kind": "w81_v2_consolidated_payload",
+            "vector": [
+                float(round(float(Y[i, d]), 12))
+                for d in range(D_out)],
+            "turn_index": int(getattr(e, "turn_index", i)),
+        })
+        slots.append(LearnedConsolidationSlotV2(
+            head_cid=str(module.cid()),
+            slot_index=int(i),
+            consolidated_payload_cid=str(payload_cid),
+        ))
+    return slots
+
+
+def attach_v2_to_long_horizon_carrier(
+        *,
+        module: SequenceConditionedConsolidationModuleV2,
+        inner_v1: Any,
+) -> Any:
+    """Build a ``LongHorizonReconstructionCarrierV2`` whose
+    ``learned_slots`` are populated by V2.
+
+    This is the load-bearing "plugs into the reconstruction /
+    replay / retention stack" entrypoint for P1 #9 — a V2
+    module replaces V1's pointwise head as the slot
+    populator without any schema change to the carrier.
+    """
+    from .long_horizon_reconstruction_substrate_v2 import (
+        LongHorizonReconstructionCarrierV2,
+        W79_LHR_SUBSTRATE_V2_SCHEMA_VERSION,
+    )
+    slots = build_v2_carrier_slots(
+        module=module,
+        carrier_entries=tuple(inner_v1.entries))
+    merkle_v2 = _sha256_hex({
+        "kind": "w79_lhr_substrate_v2_merkle_root",
+        "inner_v1_merkle_root_cid": str(
+            inner_v1.merkle_root_cid),
+        "learned_slot_cids": [s.cid() for s in slots],
+    })
+    return LongHorizonReconstructionCarrierV2(
+        schema=W79_LHR_SUBSTRATE_V2_SCHEMA_VERSION,
+        inner_v1=inner_v1,
+        learned_slots=tuple(slots),
+        merkle_root_cid_v2=str(merkle_v2),
+    )

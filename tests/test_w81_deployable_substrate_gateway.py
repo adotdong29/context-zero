@@ -348,6 +348,109 @@ def test_w81_gateway_end_to_end_bench():
     assert len(rep.routed_endpoints) == 4
 
 
+def test_w81_gateway_stream_true_returns_non_streaming_body():
+    """`stream=true` requests are answered with a single
+    non-streaming JSON body; `streaming_supported` is false and
+    `stream_requested` echoes the caller's intent."""
+    from coordpy.deployable_substrate_gateway_v1 import (
+        W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+    )
+    gw = _build_gateway()
+    resp = gw.dispatch(
+        path=W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+        body={
+            "messages": [{"role": "user", "content": "x"}],
+            "max_tokens": 2,
+            "stream": True,
+        })
+    assert int(resp.status) == 200
+    assert resp.body["streaming_supported"] is False
+    assert resp.body["stream_requested"] is True
+    # Body is a single complete chat-completion, not chunked.
+    assert resp.body["object"] == "chat.completion"
+    assert len(resp.body["choices"]) == 1
+
+
+def test_w81_gateway_chat_completion_has_system_fingerprint():
+    """OpenAI shape compatibility: response carries
+    `system_fingerprint`, content-addressed against the
+    runtime params CID so identical configs produce identical
+    fingerprints."""
+    from coordpy.deployable_substrate_gateway_v1 import (
+        W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+    )
+    gw_a = _build_gateway()
+    gw_b = _build_gateway()
+    body = {
+        "messages": [{"role": "user", "content": "fp"}],
+        "max_tokens": 1,
+    }
+    r_a = gw_a.dispatch(
+        path=W81_GATEWAY_PATH_CHAT_COMPLETIONS, body=body)
+    r_b = gw_b.dispatch(
+        path=W81_GATEWAY_PATH_CHAT_COMPLETIONS, body=body)
+    assert "system_fingerprint" in r_a.body
+    assert isinstance(r_a.body["system_fingerprint"], str)
+    assert r_a.body["system_fingerprint"].startswith("fp_")
+    # Same runtime params -> same fingerprint.
+    assert (r_a.body["system_fingerprint"]
+            == r_b.body["system_fingerprint"])
+
+
+def test_w81_gateway_chat_completion_logprobs_is_null_by_default():
+    """OpenAI strict-spec compatibility: `choices[].logprobs`
+    is null when not requested. The CoordPy research extension
+    `x_coordpy_raw_logits_head` is namespaced with the `x_`
+    prefix so strict SDKs ignore it."""
+    from coordpy.deployable_substrate_gateway_v1 import (
+        W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+    )
+    gw = _build_gateway()
+    resp = gw.dispatch(
+        path=W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+        body={
+            "messages": [{"role": "user", "content": "logp"}],
+            "max_tokens": 1,
+        })
+    choice = resp.body["choices"][0]
+    assert choice["logprobs"] is None
+    # Raw research-extension is present under x_ prefix.
+    assert "x_coordpy_raw_logits_head" in choice
+    assert isinstance(
+        choice["x_coordpy_raw_logits_head"], list)
+
+
+def test_w81_gateway_openai_sdk_round_trip():
+    """If `openai-python` is available, verify a real
+    `openai.OpenAI` client can talk to the gateway over HTTP.
+    This is the load-bearing "standard client can talk to it"
+    DoD criterion for P1 #7."""
+    openai = pytest.importorskip("openai")
+    from coordpy.deployable_substrate_gateway_v1 import (
+        W81_GATEWAY_PATH_CHAT_COMPLETIONS,
+    )
+    gw = _build_gateway()
+    server = gw.serve_forever(host="127.0.0.1", port=0)
+    try:
+        client = openai.OpenAI(
+            base_url=f"http://127.0.0.1:{server.actual_port}/v1",
+            api_key="dummy")
+        resp = client.chat.completions.create(
+            model="controlled",
+            messages=[
+                {"role": "user", "content": "sdk"},
+            ],
+            max_tokens=2)
+        assert resp.object == "chat.completion"
+        assert len(resp.choices) == 1
+        assert resp.choices[0].message.role == "assistant"
+        # logprobs is null in our response — the SDK should
+        # accept that.
+        assert resp.choices[0].logprobs is None
+    finally:
+        server.stop()
+
+
 def test_w81_gateway_witness_chains_state():
     from coordpy.deployable_substrate_gateway_v1 import (
         W81_GATEWAY_PATH_HEALTHZ,

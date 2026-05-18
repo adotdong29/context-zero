@@ -203,3 +203,82 @@ def test_w81_v2_recurrent_hidden_state_evolves():
     # Successive hidden states should differ.
     diffs = np.linalg.norm(H[1:] - H[:-1], axis=1)
     assert float(np.min(diffs)) > 1e-6
+
+
+def test_w81_v2_plugs_into_long_horizon_reconstruction_carrier():
+    """The load-bearing "plugs into the reconstruction / replay /
+    retention stack" requirement from P1 #9's Definition of Done.
+
+    V2 must be able to populate the W79 LHR carrier V2's
+    ``learned_slots`` field in place of V1's pointwise head.
+    """
+    from coordpy.learned_consolidation_v2 import (
+        attach_v2_to_long_horizon_carrier,
+        build_sequence_conditioned_consolidation_module_v2,
+        build_v2_carrier_slots,
+    )
+    from coordpy.long_horizon_reconstruction_substrate_v2 import (
+        LongHorizonReconstructionCarrierV2,
+        build_default_long_horizon_reconstruction_carrier_v2,
+    )
+    from coordpy.long_horizon_reconstruction_substrate_v1 import (
+        build_default_long_horizon_reconstruction_carrier,
+    )
+
+    # Build V2 module.
+    mod = build_sequence_conditioned_consolidation_module_v2(
+        seed=67)
+    # Build the inner V1 carrier.
+    inner_v1 = build_default_long_horizon_reconstruction_carrier(
+        n_events=16, seed=67)
+    # Build slots via the V2 adapter.
+    slots = build_v2_carrier_slots(
+        module=mod, carrier_entries=inner_v1.entries)
+    assert len(slots) == len(inner_v1.entries)
+    # Each slot has a content-addressed payload.
+    assert all(
+        isinstance(s.consolidated_payload_cid, str)
+        and len(s.consolidated_payload_cid) == 64
+        for s in slots)
+    # head_cid in each slot matches the V2 module CID.
+    assert all(s.head_cid == mod.cid() for s in slots)
+    # Slot indices are dense and ordered.
+    assert [s.slot_index for s in slots] == list(
+        range(len(slots)))
+    # Construct a V2 carrier with V2-populated slots.
+    carrier_v2 = attach_v2_to_long_horizon_carrier(
+        module=mod, inner_v1=inner_v1)
+    assert isinstance(
+        carrier_v2, LongHorizonReconstructionCarrierV2)
+    # The V2 carrier has the V2-populated slots.
+    assert len(carrier_v2.learned_slots) == len(
+        inner_v1.entries)
+    # And the merkle root V2 incorporates the V2 slot CIDs.
+    assert isinstance(carrier_v2.merkle_root_cid_v2, str)
+
+
+def test_w81_v2_carrier_slots_deterministic():
+    """Identical V2 module + identical carrier entries ->
+    identical slot CIDs."""
+    from coordpy.learned_consolidation_v2 import (
+        build_sequence_conditioned_consolidation_module_v2,
+        build_v2_carrier_slots,
+    )
+    from coordpy.long_horizon_reconstruction_substrate_v1 import (
+        build_default_long_horizon_reconstruction_carrier,
+    )
+    mod_a = build_sequence_conditioned_consolidation_module_v2(
+        seed=71)
+    mod_b = build_sequence_conditioned_consolidation_module_v2(
+        seed=71)
+    inner_a = build_default_long_horizon_reconstruction_carrier(
+        n_events=12, seed=71)
+    inner_b = build_default_long_horizon_reconstruction_carrier(
+        n_events=12, seed=71)
+    slots_a = build_v2_carrier_slots(
+        module=mod_a, carrier_entries=inner_a.entries)
+    slots_b = build_v2_carrier_slots(
+        module=mod_b, carrier_entries=inner_b.entries)
+    assert len(slots_a) == len(slots_b)
+    for sa, sb in zip(slots_a, slots_b):
+        assert sa.cid() == sb.cid()

@@ -381,11 +381,19 @@ class DeployableSubstrateGatewayV1:
             )
             resp = self.facade.chat_completions_create(
                 request=req)
+            stream_requested = bool(body.get("stream", False))
+            # OpenAI shape: system_fingerprint is a deterministic
+            # build-identifier; we set it to a runtime-params-CID
+            # prefix so the gateway response is fully content-
+            # addressed and reproducible.
+            system_fingerprint = (
+                "fp_" + str(self.runtime_params.cid())[:12])
             body_out = {
                 "id": str(resp.id),
                 "object": str(resp.object),
                 "created": int(resp.created),
                 "model": str(resp.model),
+                "system_fingerprint": system_fingerprint,
                 "choices": [
                     {
                         "index": int(c.index),
@@ -394,12 +402,23 @@ class DeployableSubstrateGatewayV1:
                             "content": str(c.message.content),
                         },
                         "finish_reason": str(c.finish_reason),
-                        "logprobs": list(c.logprobs),
+                        # OpenAI shape: logprobs is either null
+                        # (when not requested) or a structured
+                        # object. V1 returns null on the
+                        # chat-completions path; raw logits are
+                        # available via /v1/substrate/forward.
+                        "logprobs": None,
+                        # Substrate side: raw final-position
+                        # logits as a research extension. Hosted
+                        # APIs do NOT carry this field.
+                        "x_coordpy_raw_logits_head": list(
+                            c.logprobs),
                     }
                     for c in resp.choices
                 ],
                 "usage": dict(resp.usage),
                 "streaming_supported": False,
+                "stream_requested": stream_requested,
                 "facade_response_cid": str(resp.cid()),
             }
             if resp.substrate_side_channel is not None:
