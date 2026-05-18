@@ -64,11 +64,11 @@ Six new modules under `coordpy/`, six new test files under
 | #10 | `coordpy.far_horizon_blackout_benchmark_v1`           | 16    |
 | #15 | `coordpy.simultaneous_compound_failure_benchmark_v1`  | 14    |
 | #13 | `coordpy.cross_runtime_state_portability_v1`          | 16    |
-| #18 | `coordpy.cryptographic_state_integrity_v1`            | 19    |
-| #11 | `coordpy.event_sourced_memory_graph_v1`               | 18    |
-| #16 | `coordpy.distributed_substrate_coordination_v1`       | 16    |
+| #18 | `coordpy.cryptographic_state_integrity_v1`            | 23    |
+| #11 | `coordpy.event_sourced_memory_graph_v1`               | 21    |
+| #16 | `coordpy.distributed_substrate_coordination_v1`       | 21    |
 
-**99 new tests, all passing on Python 3.11 with NumPy.** All
+**111 new tests, all passing on Python 3.11 with NumPy.** All
 P0/P1 baselines stay green and untouched. None of the six
 modules are added to the `coordpy` top-level namespace —
 they're explicit-import only.
@@ -234,27 +234,58 @@ All the W82 caveats listed in
   same-sig bit-identical, cross-sig cosine, cross-sig
   classification, non-portable drop, honest-scope coord-0,
   determinism).
-- [x] `tests/test_w82_cryptographic_state_integrity.py` — 19
+- [x] `tests/test_w82_cryptographic_state_integrity.py` — 23
   tests (snapshot content addressing, payload re-hash, Merkle
   inclusion log n, HMAC sign+verify, bad HMAC, unsigned
   verdict, all 5 verdicts enumerate, silent corruption,
   provenance violation, rollback round-trip, clean merge,
-  unsafe merge, end-to-end bench).
-- [x] `tests/test_w82_event_sourced_memory_graph.py` — 18
+  unsafe merge, end-to-end bench, integrity-aware fallback
+  decision maps each verdict).
+- [x] `tests/test_w82_event_sourced_memory_graph.py` — 21
   tests (event content addressing, append-only, orphan
   parent rejected, branch / merge first-class, four query
   kinds, query plans, ancestor path through merge,
   provenance certificate, derived view, baseline failure,
-  graph dominates baselines).
+  graph dominates baselines, carrier-fallback recovers
+  evicted events).
 - [x] `tests/test_w82_distributed_substrate_coordination.py`
-  — 16 tests (consistency verdicts enumerate, host content
+  — 21 tests (consistency verdicts enumerate, host content
   addressing, envelope content addressing, envelope verify,
   apply idempotent, corrupt envelope detected, partition
   content addressing, heal+sync converges, cross-runtime
-  envelope, replicate skip exclude, deterministic bench).
+  envelope, replicate skip exclude, deterministic bench,
+  budget-aware migration policy accepts / rejects on bytes /
+  events / freshness).
 
-Total: **99 tests, all passing on Python 3.11 with NumPy.**
+Total: **111 tests, all passing on Python 3.11 with NumPy.**
 W79 baseline (28/28) + P0/P1 baselines unchanged.
+
+## Beyond definition-of-done — candidate-direction hardenings
+
+The W82 modules also close several "candidate direction" gaps
+called out in the meta issue but not strictly in any
+issue's Definition of Done:
+
+* **#11 carrier-fallback query**
+  (`execute_query_with_carrier_fallback_v1`). Bridges the
+  live event graph and a long-horizon-carrier mapping
+  (`event_id → event_cid`): a `BY_EVENT_ID` query that
+  misses the graph can be answered by the carrier with a
+  `carrier_fallback` detail tag and a clean content-
+  addressed provenance trail.
+* **#16 budget-aware migration policy**
+  (`MigrationBudgetPolicyV1`, `MigrationBudgetDecisionV1`).
+  Three explicit budgets — max bytes per migration, max
+  events per migration, minimum freshness age — with
+  content-addressed accept/reject decisions and explicit
+  rejection reasons. Migrations that exceed budget are
+  auditably refused, not silently truncated.
+* **#18 integrity-aware abstain/fallback decisions**
+  (`integrity_aware_fallback_decision_v1`). Maps each of the
+  five integrity verdicts to a recommended action
+  (`COMMIT`, `ROLLBACK`, `ABSTAIN`, `ESCALATE`). Composes
+  with the W81 adversarial-consensus `abstain`/`escalate`
+  vocabulary.
 
 ## Files changed
 

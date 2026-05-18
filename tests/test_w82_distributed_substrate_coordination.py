@@ -352,6 +352,157 @@ def test_w82_distributed_sync_decision_records_pre_post_roots():
         decision.merkle_root_post_heal_per_host["h_b"])
 
 
+def test_w82_distributed_budget_policy_content_addressed():
+    from coordpy.distributed_substrate_coordination_v1 import (
+        build_migration_budget_policy_v1,
+    )
+    a = build_migration_budget_policy_v1(
+        max_bytes_per_migration=1000,
+        max_events_per_migration=10)
+    b = build_migration_budget_policy_v1(
+        max_bytes_per_migration=1000,
+        max_events_per_migration=10)
+    c = build_migration_budget_policy_v1(
+        max_bytes_per_migration=2000,
+        max_events_per_migration=10)
+    assert a.cid() == b.cid()
+    assert a.cid() != c.cid()
+
+
+def test_w82_distributed_budget_policy_accepts_small_envelope():
+    """A small envelope under both bytes and events caps
+    should be accepted."""
+    from coordpy.distributed_substrate_coordination_v1 import (
+        build_simulated_host_v1,
+        build_migration_envelope_v1,
+        build_migration_budget_policy_v1,
+        decide_migration_budget_v1,
+    )
+    from coordpy.event_sourced_memory_graph_v1 import (
+        build_event_node_v1,
+    )
+    src = build_simulated_host_v1(host_id="src")
+    tgt = build_simulated_host_v1(host_id="tgt")
+    e = build_event_node_v1(
+        event_id="e1", kind="x", payload_bytes=b"small",
+        parent_event_ids=(
+            src.event_graph.root_event_id,),
+        branch_label="main", timestamp_ns=100)
+    src = src.append_event(e)
+    env = build_migration_envelope_v1(
+        source=src, target=tgt,
+        event_ids_to_migrate=("e1",))
+    policy = build_migration_budget_policy_v1(
+        max_bytes_per_migration=10_000,
+        max_events_per_migration=10)
+    decision = decide_migration_budget_v1(
+        policy=policy, envelope=env,
+        current_time_ns=200)
+    assert decision.accepted is True
+    assert decision.rejection_reason == ""
+
+
+def test_w82_distributed_budget_policy_rejects_oversize_bytes():
+    from coordpy.distributed_substrate_coordination_v1 import (
+        build_simulated_host_v1,
+        build_migration_envelope_v1,
+        build_migration_budget_policy_v1,
+        decide_migration_budget_v1,
+    )
+    from coordpy.event_sourced_memory_graph_v1 import (
+        build_event_node_v1,
+    )
+    src = build_simulated_host_v1(host_id="src")
+    tgt = build_simulated_host_v1(host_id="tgt")
+    e = build_event_node_v1(
+        event_id="big", kind="x",
+        payload_bytes=b"x" * 5000,
+        parent_event_ids=(
+            src.event_graph.root_event_id,),
+        branch_label="main", timestamp_ns=10)
+    src = src.append_event(e)
+    env = build_migration_envelope_v1(
+        source=src, target=tgt,
+        event_ids_to_migrate=("big",))
+    policy = build_migration_budget_policy_v1(
+        max_bytes_per_migration=1000,  # too tight
+        max_events_per_migration=10)
+    decision = decide_migration_budget_v1(
+        policy=policy, envelope=env, current_time_ns=100)
+    assert decision.accepted is False
+    assert "max_bytes_per_migration" in (
+        decision.rejection_reason)
+
+
+def test_w82_distributed_budget_policy_rejects_too_many_events():
+    from coordpy.distributed_substrate_coordination_v1 import (
+        build_simulated_host_v1,
+        build_migration_envelope_v1,
+        build_migration_budget_policy_v1,
+        decide_migration_budget_v1,
+    )
+    from coordpy.event_sourced_memory_graph_v1 import (
+        build_event_node_v1,
+    )
+    src = build_simulated_host_v1(host_id="src")
+    tgt = build_simulated_host_v1(host_id="tgt")
+    eids: list[str] = []
+    prev = src.event_graph.root_event_id
+    for i in range(5):
+        ev = build_event_node_v1(
+            event_id=f"e{i}", kind="x",
+            payload_bytes=b"a",
+            parent_event_ids=(str(prev),),
+            branch_label="main", timestamp_ns=i + 1)
+        src = src.append_event(ev)
+        eids.append(ev.event_id)
+        prev = ev.event_id
+    env = build_migration_envelope_v1(
+        source=src, target=tgt,
+        event_ids_to_migrate=tuple(eids))
+    policy = build_migration_budget_policy_v1(
+        max_bytes_per_migration=10_000,
+        max_events_per_migration=2)
+    decision = decide_migration_budget_v1(
+        policy=policy, envelope=env, current_time_ns=100)
+    assert decision.accepted is False
+    assert "max_events_per_migration" in (
+        decision.rejection_reason)
+
+
+def test_w82_distributed_budget_policy_rejects_stale_events():
+    from coordpy.distributed_substrate_coordination_v1 import (
+        build_simulated_host_v1,
+        build_migration_envelope_v1,
+        build_migration_budget_policy_v1,
+        decide_migration_budget_v1,
+    )
+    from coordpy.event_sourced_memory_graph_v1 import (
+        build_event_node_v1,
+    )
+    src = build_simulated_host_v1(host_id="src")
+    tgt = build_simulated_host_v1(host_id="tgt")
+    ev = build_event_node_v1(
+        event_id="ancient", kind="x", payload_bytes=b"a",
+        parent_event_ids=(
+            src.event_graph.root_event_id,),
+        branch_label="main", timestamp_ns=10)
+    src = src.append_event(ev)
+    env = build_migration_envelope_v1(
+        source=src, target=tgt,
+        event_ids_to_migrate=("ancient",))
+    policy = build_migration_budget_policy_v1(
+        max_bytes_per_migration=10_000,
+        max_events_per_migration=10,
+        min_freshness_age_ns=100)  # 100ns freshness cap
+    decision = decide_migration_budget_v1(
+        policy=policy, envelope=env,
+        current_time_ns=10_000)  # event is 9990ns old
+    assert decision.accepted is False
+    assert "min_freshness_age_ns" in (
+        decision.rejection_reason)
+
+
 def test_w82_distributed_envelope_with_missing_event_raises():
     from coordpy.distributed_substrate_coordination_v1 import (
         build_simulated_host_v1,

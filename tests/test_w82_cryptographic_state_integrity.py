@@ -374,3 +374,73 @@ def test_w82_integrity_all_five_verdicts_enumerate():
         IntegrityVerdict.BAD_SIGNATURE.value,
         IntegrityVerdict.UNSIGNED.value,
     }
+
+
+def test_w82_integrity_aware_actions_enumerate():
+    from coordpy.cryptographic_state_integrity_v1 import (
+        W82_INTEGRITY_AWARE_ACTIONS,
+        IntegrityAwareAction,
+    )
+    assert set(W82_INTEGRITY_AWARE_ACTIONS) == {
+        IntegrityAwareAction.COMMIT.value,
+        IntegrityAwareAction.ABSTAIN.value,
+        IntegrityAwareAction.ROLLBACK.value,
+        IntegrityAwareAction.ESCALATE.value,
+    }
+
+
+def test_w82_integrity_aware_fallback_decision_maps_each_verdict():
+    """Closes P2 #18 'integrity-aware abstain/fallback
+    decisions' candidate direction: each integrity verdict
+    maps to a recommended action."""
+    from coordpy.cryptographic_state_integrity_v1 import (
+        IntegrityVerdict,
+        IntegrityAwareAction,
+        integrity_aware_fallback_decision_v1,
+    )
+    # OK → COMMIT
+    assert integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.OK.value
+    ).recommended_action == IntegrityAwareAction.COMMIT.value
+    # CORRUPT → ROLLBACK
+    assert integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.CORRUPT.value
+    ).recommended_action == IntegrityAwareAction.ROLLBACK.value
+    # PROVENANCE_VIOLATION → ABSTAIN
+    assert integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.PROVENANCE_VIOLATION.value
+    ).recommended_action == IntegrityAwareAction.ABSTAIN.value
+    # BAD_SIGNATURE → ESCALATE
+    assert integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.BAD_SIGNATURE.value
+    ).recommended_action == IntegrityAwareAction.ESCALATE.value
+    # UNSIGNED → ABSTAIN
+    assert integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.UNSIGNED.value
+    ).recommended_action == IntegrityAwareAction.ABSTAIN.value
+
+
+def test_w82_integrity_aware_fallback_decision_content_addressed():
+    from coordpy.cryptographic_state_integrity_v1 import (
+        IntegrityVerdict,
+        integrity_aware_fallback_decision_v1,
+    )
+    a = integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.CORRUPT.value)
+    b = integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.CORRUPT.value)
+    c = integrity_aware_fallback_decision_v1(
+        IntegrityVerdict.OK.value)
+    assert a.cid() == b.cid()
+    assert a.cid() != c.cid()
+
+
+def test_w82_integrity_aware_fallback_unknown_verdict_fails_safe():
+    from coordpy.cryptographic_state_integrity_v1 import (
+        IntegrityAwareAction,
+        integrity_aware_fallback_decision_v1,
+    )
+    d = integrity_aware_fallback_decision_v1("not_a_real_verdict")
+    # Fail safe: unknown verdicts → ABSTAIN
+    assert d.recommended_action == (
+        IntegrityAwareAction.ABSTAIN.value)

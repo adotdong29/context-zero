@@ -521,6 +521,118 @@ def verify_snapshot_integrity_v1(
     )
 
 
+class IntegrityAwareAction(str, enum.Enum):
+    """Recommended action given an integrity verdict.
+
+    Used by callers (e.g. the W81 adversarial consensus
+    controller) to decide whether to commit, abstain, or
+    rollback when integrity verification fails.
+    """
+
+    COMMIT = "commit"
+    ABSTAIN = "abstain"
+    ROLLBACK = "rollback"
+    ESCALATE = "escalate"
+
+
+W82_INTEGRITY_AWARE_ACTIONS: tuple[str, ...] = tuple(
+    a.value for a in IntegrityAwareAction)
+
+
+@dataclasses.dataclass(frozen=True)
+class IntegrityAwareFallbackDecisionV1:
+    """A per-verdict integrity-aware action recommendation.
+
+    Maps the five integrity verdicts to one of four explicit
+    actions:
+
+    * ``OK`` → ``COMMIT``
+    * ``CORRUPT`` → ``ROLLBACK`` (try a rollback anchor)
+    * ``PROVENANCE_VIOLATION`` → ``ABSTAIN``
+    * ``BAD_SIGNATURE`` → ``ESCALATE`` (tampering may be
+      systematic — surface to a higher trust level)
+    * ``UNSIGNED`` → ``ABSTAIN`` (informational; caller
+      should not commit unsigned state when a key was
+      expected)
+
+    The decision is content-addressed.
+    """
+
+    schema: str
+    integrity_verdict: str
+    recommended_action: str
+    detail: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema": str(self.schema),
+            "integrity_verdict": str(self.integrity_verdict),
+            "recommended_action": str(
+                self.recommended_action),
+            "detail": str(self.detail),
+        }
+
+    def cid(self) -> str:
+        return _sha256_hex({
+            "kind": "w82_integrity_aware_fallback_decision_v1",
+            "decision": self.to_dict()})
+
+
+def integrity_aware_fallback_decision_v1(
+        verdict: str,
+) -> IntegrityAwareFallbackDecisionV1:
+    """Map an integrity verdict to a recommended action."""
+    v = str(verdict)
+    if v == IntegrityVerdict.OK.value:
+        return IntegrityAwareFallbackDecisionV1(
+            schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+            integrity_verdict=v,
+            recommended_action=IntegrityAwareAction.COMMIT.value,
+            detail="integrity ok → commit")
+    if v == IntegrityVerdict.CORRUPT.value:
+        return IntegrityAwareFallbackDecisionV1(
+            schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+            integrity_verdict=v,
+            recommended_action=(
+                IntegrityAwareAction.ROLLBACK.value),
+            detail=(
+                "payload bytes do not hash to declared "
+                "payload_cid; recover via rollback anchor"))
+    if v == IntegrityVerdict.PROVENANCE_VIOLATION.value:
+        return IntegrityAwareFallbackDecisionV1(
+            schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+            integrity_verdict=v,
+            recommended_action=(
+                IntegrityAwareAction.ABSTAIN.value),
+            detail=(
+                "declared parent / lineage does not match "
+                "supplied evidence; abstain"))
+    if v == IntegrityVerdict.BAD_SIGNATURE.value:
+        return IntegrityAwareFallbackDecisionV1(
+            schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+            integrity_verdict=v,
+            recommended_action=(
+                IntegrityAwareAction.ESCALATE.value),
+            detail=(
+                "HMAC mismatch suggests tampering after "
+                "signing; escalate to a higher trust level"))
+    if v == IntegrityVerdict.UNSIGNED.value:
+        return IntegrityAwareFallbackDecisionV1(
+            schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+            integrity_verdict=v,
+            recommended_action=(
+                IntegrityAwareAction.ABSTAIN.value),
+            detail=(
+                "snapshot unsigned but a key was supplied; "
+                "abstain rather than commit unsigned state"))
+    # Unknown verdict — fail safe.
+    return IntegrityAwareFallbackDecisionV1(
+        schema=W82_INTEGRITY_V1_SCHEMA_VERSION,
+        integrity_verdict=v,
+        recommended_action=IntegrityAwareAction.ABSTAIN.value,
+        detail=f"unknown verdict {v!r}; fail safe → abstain")
+
+
 def verify_chain_integrity_v1(
         *, snapshots: Sequence[StateSnapshotV1],
         hmac_key: bytes | None = None,
@@ -941,12 +1053,15 @@ __all__ = [
     "W82_INTEGRITY_DEFAULT_MERKLE_FANOUT",
     "W82_INTEGRITY_DEFAULT_HMAC_KEY",
     "W82_INTEGRITY_VERDICTS",
+    "W82_INTEGRITY_AWARE_ACTIONS",
     "IntegrityVerdict",
+    "IntegrityAwareAction",
     "StateSnapshotV1",
     "MerkleHashTreeV1",
     "RollbackAnchorV1",
     "BranchMergeWitnessV1",
     "IntegrityVerificationReportV1",
+    "IntegrityAwareFallbackDecisionV1",
     "IntegrityBenchReportV1",
     "build_state_snapshot_v1",
     "build_rollback_anchor_v1",
@@ -955,6 +1070,7 @@ __all__ = [
     "execute_rollback_v1",
     "build_branch_merge_witness_v1",
     "verify_branch_merge_witness_v1",
+    "integrity_aware_fallback_decision_v1",
     "simulate_silent_corruption_v1",
     "build_clean_snapshot_chain_v1",
     "run_corruption_rollback_merge_bench_v1",

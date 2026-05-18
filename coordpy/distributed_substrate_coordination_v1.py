@@ -533,6 +533,154 @@ def heal_partition_and_sync_v1(
 
 
 # ---------------------------------------------------------------
+# Budget-aware migration policy
+# ---------------------------------------------------------------
+
+@dataclasses.dataclass(frozen=True)
+class MigrationBudgetPolicyV1:
+    """A budget-aware migration policy.
+
+    Migrations are not free — they cost bytes shipped, bytes
+    re-hashed on the target, and time-to-replay. V1 exposes
+    three explicit budgets and a per-envelope decision:
+
+    * ``max_bytes_per_migration`` — drop envelopes whose
+      shipped event payload total exceeds this size
+    * ``max_events_per_migration`` — drop envelopes shipping
+      more than this many events at once (latency cap)
+    * ``min_freshness_age_ns`` — refuse to migrate events
+      older than this (best-effort freshness signal)
+
+    The policy returns a ``MigrationBudgetDecisionV1`` so the
+    caller can see *why* a migration was accepted or
+    rejected. The decision is content-addressed for audit
+    chaining.
+    """
+
+    schema: str
+    max_bytes_per_migration: int
+    max_events_per_migration: int
+    min_freshness_age_ns: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema": str(self.schema),
+            "max_bytes_per_migration": int(
+                self.max_bytes_per_migration),
+            "max_events_per_migration": int(
+                self.max_events_per_migration),
+            "min_freshness_age_ns": int(
+                self.min_freshness_age_ns),
+        }
+
+    def cid(self) -> str:
+        return _sha256_hex({
+            "kind": "w82_migration_budget_policy_v1",
+            "policy": self.to_dict()})
+
+
+@dataclasses.dataclass(frozen=True)
+class MigrationBudgetDecisionV1:
+    """Per-envelope budget decision."""
+
+    schema: str
+    policy_cid: str
+    envelope_cid: str
+    accepted: bool
+    total_bytes: int
+    n_events: int
+    oldest_event_age_ns: int
+    rejection_reason: str  # "" if accepted
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema": str(self.schema),
+            "policy_cid": str(self.policy_cid),
+            "envelope_cid": str(self.envelope_cid),
+            "accepted": bool(self.accepted),
+            "total_bytes": int(self.total_bytes),
+            "n_events": int(self.n_events),
+            "oldest_event_age_ns": int(
+                self.oldest_event_age_ns),
+            "rejection_reason": str(self.rejection_reason),
+        }
+
+    def cid(self) -> str:
+        return _sha256_hex({
+            "kind": "w82_migration_budget_decision_v1",
+            "decision": self.to_dict()})
+
+
+def build_migration_budget_policy_v1(
+        *, max_bytes_per_migration: int = 1_000_000,
+        max_events_per_migration: int = 1024,
+        min_freshness_age_ns: int = 0,
+) -> MigrationBudgetPolicyV1:
+    """Build a default budget policy. ``min_freshness_age_ns
+    = 0`` means no freshness floor."""
+    return MigrationBudgetPolicyV1(
+        schema=W82_DISTRIBUTED_V1_SCHEMA_VERSION,
+        max_bytes_per_migration=int(max_bytes_per_migration),
+        max_events_per_migration=int(max_events_per_migration),
+        min_freshness_age_ns=int(min_freshness_age_ns),
+    )
+
+
+def decide_migration_budget_v1(
+        *, policy: MigrationBudgetPolicyV1,
+        envelope: MigrationEnvelopeV1,
+        current_time_ns: int,
+) -> MigrationBudgetDecisionV1:
+    """Apply the budget policy to ``envelope``.
+
+    Returns a ``MigrationBudgetDecisionV1`` with explicit
+    rationale. ``accepted=False`` means the migration MUST
+    be rejected (or fragmented and retried). Accepted
+    envelopes carry empty ``rejection_reason``.
+    """
+    total_bytes = sum(
+        int(len(e.payload_bytes)) for e in envelope.events)
+    n_events = int(envelope.n_events)
+    if envelope.events:
+        oldest_ts = min(
+            int(e.timestamp_ns) for e in envelope.events)
+        age = max(0, int(current_time_ns) - int(oldest_ts))
+    else:
+        age = 0
+    accepted = True
+    reason = ""
+    if total_bytes > int(policy.max_bytes_per_migration):
+        accepted = False
+        reason = (
+            f"envelope total_bytes {total_bytes} > "
+            f"policy.max_bytes_per_migration "
+            f"{policy.max_bytes_per_migration}")
+    elif n_events > int(policy.max_events_per_migration):
+        accepted = False
+        reason = (
+            f"envelope n_events {n_events} > "
+            f"policy.max_events_per_migration "
+            f"{policy.max_events_per_migration}")
+    elif (int(policy.min_freshness_age_ns) > 0 and
+          age > int(policy.min_freshness_age_ns)):
+        accepted = False
+        reason = (
+            f"oldest event age {age}ns > "
+            f"policy.min_freshness_age_ns "
+            f"{policy.min_freshness_age_ns}")
+    return MigrationBudgetDecisionV1(
+        schema=W82_DISTRIBUTED_V1_SCHEMA_VERSION,
+        policy_cid=str(policy.cid()),
+        envelope_cid=str(envelope.cid()),
+        accepted=bool(accepted),
+        total_bytes=int(total_bytes),
+        n_events=int(n_events),
+        oldest_event_age_ns=int(age),
+        rejection_reason=str(reason),
+    )
+
+
+# ---------------------------------------------------------------
 # Replicate / append helpers
 # ---------------------------------------------------------------
 
@@ -804,6 +952,8 @@ __all__ = [
     "ReplicationManifestV1",
     "PartitionEventV1",
     "SyncDecisionV1",
+    "MigrationBudgetPolicyV1",
+    "MigrationBudgetDecisionV1",
     "DistributedCoordinationBenchReportV1",
     "build_simulated_host_v1",
     "build_migration_envelope_v1",
@@ -811,5 +961,7 @@ __all__ = [
     "apply_migration_envelope_v1",
     "replicate_event_to_hosts_v1",
     "heal_partition_and_sync_v1",
+    "build_migration_budget_policy_v1",
+    "decide_migration_budget_v1",
     "run_distributed_coordination_bench_v1",
 ]

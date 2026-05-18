@@ -111,10 +111,35 @@ sequencing:
 W82 is *strictly additive* against the W81 baseline. All
 existing W56..W81 modules, tests, and theorems are unmodified;
 the W79 baseline (28/28) and W81 P1-attack tests still pass.
-**Test count delta**: +99 new tests (16 far-horizon +
-14 compound-failure + 16 portability + 19 integrity +
-18 event-graph + 16 distributed), all passing on
+**Test count delta**: +111 new tests (16 far-horizon +
+14 compound-failure + 16 portability + 23 integrity +
+21 event-graph + 21 distributed), all passing on
 Python 3.11 with NumPy.
+
+Beyond the load-bearing definition-of-done bullets, W82 also
+covers several "candidate direction" hardenings called out in
+the meta issue:
+
+* **#11 carrier-fallback query** —
+  ``execute_query_with_carrier_fallback_v1`` bridges the live
+  event graph to a long-horizon-carrier mapping
+  (``event_id → event_cid``); queries that miss the graph
+  can be answered by the carrier with a clean
+  ``carrier_fallback`` detail tag and a content-addressed
+  provenance trail.
+* **#16 budget-aware migration policy** —
+  ``MigrationBudgetPolicyV1`` exposes three explicit budgets
+  (max bytes, max events, freshness floor) and produces a
+  content-addressed ``MigrationBudgetDecisionV1`` with an
+  explicit rejection reason. Migrations that exceed the
+  policy budget are auditably refused, not silently
+  truncated.
+* **#18 integrity-aware fallback decisions** —
+  ``integrity_aware_fallback_decision_v1`` maps each of the
+  five integrity verdicts to a recommended action
+  (``COMMIT``, ``ROLLBACK``, ``ABSTAIN``, ``ESCALATE``).
+  Composes cleanly with the W81 adversarial-consensus
+  ``abstain``/``escalate`` line.
 
 ## TL;DR — W81 P1-Blocker Attack (post-W80 research milestone)
 

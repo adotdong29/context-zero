@@ -304,6 +304,75 @@ def test_w82_event_graph_query_plan_steps_present():
     assert "bfs_ancestor_path" in p2.steps
 
 
+def test_w82_event_graph_carrier_fallback_recovers_evicted_event():
+    """The carrier fallback bridges the live event graph and
+    a long-horizon carrier: events evicted from the graph are
+    recoverable via the carrier_lookup mapping. This closes
+    the P2 #11 'graph state + latent carriers + replay'
+    requirement."""
+    from coordpy.event_sourced_memory_graph_v1 import (
+        EventGraphV1,
+        build_by_event_id_query_v1,
+        execute_query_with_carrier_fallback_v1,
+    )
+    g = EventGraphV1.empty()
+    q = build_by_event_id_query_v1(
+        query_id="qc", target_event_id="evicted_e0")
+    # Without carrier — fails
+    a, _p = execute_query_with_carrier_fallback_v1(
+        graph=g, query=q)
+    assert not a.success
+    # With carrier — succeeds via fallback
+    a2, p2 = execute_query_with_carrier_fallback_v1(
+        graph=g, query=q,
+        carrier_lookup={"evicted_e0": "RECOVERED_CID"})
+    assert a2.success
+    assert a2.detail == "carrier_fallback"
+    assert a2.payload_cids == ("RECOVERED_CID",)
+    # Provenance certificate cites the carrier path
+    assert p2.contributing_event_ids == ("evicted_e0",)
+    assert p2.contributing_event_cids == ("RECOVERED_CID",)
+
+
+def test_w82_event_graph_carrier_fallback_passes_through_when_graph_hits():
+    """When the graph has the event, no carrier fallback is
+    needed — the answer comes from the graph directly."""
+    from coordpy.event_sourced_memory_graph_v1 import (
+        build_synthetic_event_graph_v1,
+        build_by_event_id_query_v1,
+        execute_query_with_carrier_fallback_v1,
+    )
+    g, ordered = build_synthetic_event_graph_v1(n_events=8)
+    target = ordered[3].event_id
+    q = build_by_event_id_query_v1(
+        query_id="qd", target_event_id=str(target))
+    a, p = execute_query_with_carrier_fallback_v1(
+        graph=g, query=q,
+        carrier_lookup={target: "WRONG_CID_SHOULD_NOT_BE_USED"})
+    assert a.success
+    # Detail should NOT be carrier_fallback — graph answered
+    assert a.detail != "carrier_fallback"
+
+
+def test_w82_event_graph_carrier_fallback_only_for_by_event_id():
+    """Carrier fallback only works for BY_EVENT_ID queries
+    (the carrier holds event_id -> event_cid mappings)."""
+    from coordpy.event_sourced_memory_graph_v1 import (
+        EventGraphV1,
+        build_by_kind_query_v1,
+        execute_query_with_carrier_fallback_v1,
+    )
+    g = EventGraphV1.empty()
+    q = build_by_kind_query_v1(
+        query_id="qk", target_kind="rare_kind")
+    # carrier lookup keys by event_id, not kind — so a
+    # BY_KIND query cannot be answered by carrier fallback
+    a, _p = execute_query_with_carrier_fallback_v1(
+        graph=g, query=q,
+        carrier_lookup={"some_event_id": "some_cid"})
+    assert not a.success
+
+
 def test_w82_event_graph_ancestor_path_includes_merge_branch():
     """Walking an ancestor path through a merge event must
     include the merge node."""

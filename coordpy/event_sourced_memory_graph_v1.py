@@ -576,6 +576,69 @@ def plan_query_v1(
     )
 
 
+def execute_query_with_carrier_fallback_v1(
+        *, graph: EventGraphV1,
+        query: MemoryQueryV1,
+        carrier_lookup: "dict[str, str] | None" = None,
+        carrier_cid: str = "",
+) -> tuple["QueryAnswerV1", "ProvenanceCertificateV1"]:
+    """Execute a query against the event graph; if the graph
+    alone cannot answer, fall back to ``carrier_lookup`` for
+    a content-addressed replay.
+
+    ``carrier_lookup`` is a ``{event_id: event_cid}`` mapping
+    derived from a long-horizon reconstruction carrier (e.g.
+    ``LongHorizonReconstructionCarrier``). The fallback path
+    answers ``BY_EVENT_ID`` queries when the event has been
+    evicted from the live graph but its CID is still in the
+    persistent carrier — i.e. it bridges the two abstraction
+    layers (live event graph + long-horizon carrier) the
+    P2 #11 issue calls for.
+
+    Returns the same ``(QueryAnswerV1, ProvenanceCertificateV1)``
+    tuple as ``execute_query_v1``. When the carrier path
+    answers, the ``QueryAnswerV1.detail`` field is set to
+    ``"carrier_fallback"`` and the provenance certificate
+    lists the carrier CID as a synthetic contributing CID so
+    the evidence path remains inspectable.
+    """
+    ans, prov = execute_query_v1(graph=graph, query=query)
+    if ans.success:
+        return ans, prov
+    if carrier_lookup is None:
+        return ans, prov
+    # Fall back: only BY_EVENT_ID is supported by carrier
+    # lookup (carrier holds event_id → event_cid map).
+    if query.kind != MemoryQueryKind.BY_EVENT_ID.value:
+        return ans, prov
+    target = str(query.target_event_id)
+    if target not in carrier_lookup:
+        return ans, prov
+    recovered_cid = str(carrier_lookup[target])
+    # Build a new answer + provenance that flag the carrier
+    # path.
+    new_ans = QueryAnswerV1(
+        schema=W82_EVENT_GRAPH_V1_SCHEMA_VERSION,
+        query_cid=str(query.cid()),
+        success=True,
+        payload_cids=(str(recovered_cid),),
+        provenance_cid="",  # filled below
+        n_events_walked=1,
+        detail="carrier_fallback",
+    )
+    new_prov = ProvenanceCertificateV1(
+        schema=W82_EVENT_GRAPH_V1_SCHEMA_VERSION,
+        query_cid=str(query.cid()),
+        contributing_event_cids=(str(recovered_cid),),
+        contributing_event_ids=(str(target),),
+        n_hops=1,
+    )
+    # Re-fill provenance_cid on the answer.
+    new_ans = dataclasses.replace(
+        new_ans, provenance_cid=str(new_prov.cid()))
+    return new_ans, new_prov
+
+
 def execute_query_v1(
         *, graph: EventGraphV1,
         query: MemoryQueryV1,
@@ -1034,6 +1097,7 @@ __all__ = [
     "build_by_ancestor_path_query_v1",
     "plan_query_v1",
     "execute_query_v1",
+    "execute_query_with_carrier_fallback_v1",
     "build_derived_summary_view_v1",
     "bounded_handoff_baseline_v1",
     "trajectory_slice_baseline_v1",
