@@ -2,11 +2,76 @@
 
 > Canonical do-not-overstate rules for the Context Zero / CoordPy
 > programme. Every milestone note, paper draft, README claim, or
-> README-of-README must satisfy these rules. Last touched: post-W79
-> W80 milestone (P0-Blocker Attack — Frontier-Quality Local Runtime
-> / Runtime Instrumentation Contract / Second-Backend Parity Matrix
-> / Living Capability Matrix / Live Local-Model Evaluation), 2026-
-> 05-18.
+> README-of-README must satisfy these rules. Last touched: post-W80
+> W81 milestone (P1-Blocker Attack — Deployable Substrate Gateway
+> / Sequence-Conditioned Learned Consolidation / Learned
+> Multi-Runtime Economics / Differentiable Memory Substrate /
+> Adversarial Consensus & Repair), 2026-05-18.
+
+## W81 (P1-Blocker Attack — Deployable Substrate Gateway / Sequence-Conditioned Learned Consolidation / Learned Multi-Runtime Economics / Differentiable Memory Substrate / Adversarial Consensus & Repair) — explicit do-not-overstate rules
+
+The W81 milestone closes the five P1 blocker meta-issues (#7,
+#9, #14, #19, #20) by adding a deployable substrate gateway V1,
+a sequence-conditioned learned consolidation V2, a learned
+multi-runtime economics controller V1, a differentiable memory
+substrate V1, and an adversarial consensus & repair line V1.
+Honest reading:
+
+- **W81 does NOT claim the deployable gateway pierces the hosted
+  wall.** The gateway routes to `controlled_runtime_substrate_v1`
+  (an in-repo NumPy runtime). Substrate axes are honestly
+  exposed only because the runtime is controlled locally —
+  identical to the W79 façade caveat. Pointing a hosted SDK at
+  this gateway does not magically give hosted-model substrate
+  access.
+- **W81 does NOT claim the gateway is production-grade.** V1
+  uses a bearer-token equality check (not OAuth / signed JWT),
+  binds plain HTTP (no TLS), and does not implement
+  Server-Sent-Events streaming. Streaming requests are answered
+  with a non-streaming JSON body carrying
+  `streaming_supported=false`. Deploy behind a reverse proxy if
+  you need TLS or streaming. These limitations are explicit in
+  `coordpy.deployable_substrate_gateway_v1` docstrings.
+- **W81 does NOT claim learned consolidation V2 is a frontier-
+  scale long-horizon memory system.** V2 uses hidden_dim 32 /
+  memory_dim 16 / 60 train iters by default on a synthetic
+  temporal-integration dataset. The wins over ridge / V1 / k=2
+  bounded window hold *on that dataset*. V2 is research-only
+  and explicit-import only.
+- **W81 does NOT claim the learned economics controller V1 is
+  trained via policy gradient on a live runtime.** V1 is
+  supervised on a synthetic optimal-action dataset derived
+  from a deterministic cost/quality simulation declared in
+  `EconomicsSimulationV1`. The "beats the heuristic" claim
+  holds against the heuristic baseline defined in the same
+  module. Live-runtime cost/quality validation is W81 follow-on
+  work, not V1.
+- **W81 does NOT claim the differentiable memory substrate V1
+  displaces the W56..W79 synthetic-substrate wins.** V1 is a
+  new differentiable-memory line, evaluated on the synthetic
+  delayed-recall task. It does not yet drive the main
+  scoreboard. Its win over V2 (sequence-conditioned single-
+  state recurrent model with hidden_dim 8) on delayed recall
+  is empirical, not theoretical.
+- **W81 does NOT claim the adversarial consensus V1 has a
+  closed-form analytical robustness bound.** The bench on n=7
+  witnesses with f=2 adversarial corrupted witnesses across
+  80 seeds shows V1 strictly beats naive averaging on mean
+  error and on a clear majority (≥ 80%) of seeds. That is an
+  *empirical* bound; the analytical proof that the trust-
+  weighted estimator beats naive averaging whenever f < n/2 is
+  W81 follow-on work, not V1.
+- **W81 does NOT replace the existing W56..W79 consensus and
+  economics controllers.** All existing controllers
+  (`consensus_fallback_controller_v25`, `replay_controller_v20`,
+  `hosted_cost_planner_v12`, etc.) are unchanged and remain
+  on the stable surface. The W81 learned + adversarial lines
+  are research-only.
+- **W81 baseline preservation rule.** Every claim made by
+  W79 (28/28 tests) and W80 (runtime instrumentation /
+  parity / substrate adapter) remains valid as W81 added no
+  modifications to those modules. The W81 diff is purely
+  additive against the W80 baseline.
 
 ## W80 (P0-Blocker Attack — Frontier-Quality Local Runtime / Runtime Instrumentation Contract / Second-Backend Parity Matrix / Living Capability Matrix / Live Local-Model Evaluation) — explicit do-not-overstate rules
 
