@@ -2,9 +2,47 @@
 
 > Main paper draft for the Context Zero programme.
 >
-> **Post-W77 research-line update (W78 Stronger Less-Bounded
-> Long-Horizon Reconstruction / Bounded-Window-Falsifier Budget-
-> Primary Two-Plane Multi-Agent Substrate Programme,
+> **Post-W78 research-line update (W79 Stronger Direct-Blocker-
+> Attack / Replacement-Then-Restart-After-Long-Delay /
+> Controlled-Runtime Substrate / OpenAI-Compatible-Façade /
+> Learned-Consolidation Budget-Primary Two-Plane Multi-Agent
+> Substrate Programme, 2026-05-17).**
+>
+> *Twenty-fourth substrate-attack milestone, and the
+> **fifteenth** multi-agent task-success-bearing substrate
+> milestone in the programme — the first to produce wins across
+> **nineteen** failure-mode regimes (W78's eighteen plus
+> **long_delay_reconstruction_after_replacement_then_restart**),
+> and the **first milestone to ship a directly-controlled second
+> substrate runtime** (``coordpy.controlled_runtime_substrate_v1``)
+> + an **OpenAI-compatible façade** over that runtime
+> (``coordpy.local_openai_compatible_facade_v1``) + an explicit
+> **autograd-style learned-consolidation head**
+> (``coordpy.learned_consolidation_v1``) — the W79 direct-
+> blocker-attack pillars that route around the structural
+> hosted-substrate wall by building substrate access we control
+> end-to-end. The W79 controlled runtime exposes the exact
+> seven substrate axes that the hosted plane blocks; the W79
+> OpenAI-compatible façade reroutes client-shaped requests into
+> that runtime; the W79 learned-consolidation head plugs into
+> the W79 long-horizon-reconstruction substrate V2 as an
+> additional read path and strictly beats a closed-form linear
+> ridge on the W79 nonlinear consolidation dataset.
+> ``MultiAgentSubstrateCoordinatorV15`` runs **thirty-two**
+> policies across all nineteen regimes.
+> ``HostedRealHandoffCoordinatorV11`` adds a controlled-runtime
+> promotion decision on top of W78's long-horizon-reconstruction
+> fallback; ``HostedRealSubstrateBoundaryV12`` enumerates fifty-
+> six blocked axes at the hosted surface. Total **76 H-bars × 3
+> seed sets**, all pass; plus **37 W79 tests**.
+> ``coordpy.__version__ == "0.5.20"``,
+> ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version
+> bump. No PyPI release. The W78 update below is preserved for
+> historical continuity.*
+
+> **Previous post-W77 research-line update (W78 Stronger Less-
+> Bounded Long-Horizon Reconstruction / Bounded-Window-Falsifier
+> Budget-Primary Two-Plane Multi-Agent Substrate Programme,
 > 2026-05-17).**
 >
 > *Twenty-third substrate-attack milestone, and the

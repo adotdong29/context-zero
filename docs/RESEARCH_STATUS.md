@@ -5,10 +5,108 @@
 > doc on what is *true now*, this file is right and the other file
 > is stale. For *theorem-by-theorem* status, see
 > `docs/THEOREM_REGISTRY.md`. For *what may be claimed*, see
-> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W77 W78
-> milestone (Stronger Less-Bounded Long-Horizon Reconstruction /
-> Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent
-> Substrate Programme research line), 2026-05-17.
+> `docs/HOW_NOT_TO_OVERSTATE.md`. Last touched: post-W78 W79
+> milestone (Stronger Direct-Blocker-Attack /
+> Replacement-Then-Restart-After-Long-Delay / Controlled-Runtime
+> Substrate / OpenAI-Compatible-Façade / Learned-Consolidation
+> Budget-Primary Two-Plane Multi-Agent Substrate Programme
+> research line), 2026-05-17.
+
+## TL;DR — W79 Stronger Direct-Blocker-Attack / Replacement-Then-Restart-After-Long-Delay / Controlled-Runtime Substrate / OpenAI-Compatible-Façade / Learned-Consolidation Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W78 research milestone)
+
+The programme now has **seventy-six** coupled research axes.
+W79 mints axis 76: the **twenty-fourth substrate-attack
+milestone**, the **fifteenth multi-agent task-success-bearing**
+substrate milestone (first to win across *nineteen* regimes:
+W78's eighteen +
+``long_delay_reconstruction_after_replacement_then_restart``),
+and the **first milestone to ship a directly-controlled
+second substrate runtime** (``coordpy.controlled_runtime_
+substrate_v1``) + an **OpenAI-compatible façade** over that
+runtime (``coordpy.local_openai_compatible_facade_v1``) + an
+explicit **autograd-style learned-consolidation head**
+(``coordpy.learned_consolidation_v1``) — the W79 direct-
+blocker-attack pillars.
+
+W79 takes the original Context-Zero directive seriously: the
+hosted-substrate wall is structural, so W79 routes around it by
+building a substrate runtime we control end-to-end, exposing the
+exact substrate axes the hosted plane blocks. The controlled
+runtime does honest transformer-class forward passes (causal
+attention, real KV cache, real hidden state, real attention
+probabilities, real per-head attention bias steering, real
+prefix-state injection, real replay-from-KV that is byte-
+identical to recompute). The façade gives client code an
+OpenAI-shaped surface to reroute against. The W79 V24 substrate
+adds the nineteenth regime (replacement-then-restart-after-long-
+delay), and the V2 bounded-window baseline family adds k=64 +
+cross-prompt summary baselines that all still fail on the W79
+regime.
+
+The load-bearing W79 wins are:
+
+1. **Direct blocker attack — controlled runtime + façade.**
+   The W79 controlled-runtime substrate V1 exposes seven
+   substrate axes the hosted plane explicitly blocks. The
+   façade returns standard OpenAI-shaped chat-completion
+   responses with an optional W79 substrate side channel that
+   carries the same axes. R200 verifies byte-identical replay.
+2. **Autograd-backed learned consolidation.** A two-layer
+   swish-MLP trained via NumPy SGD+momentum strictly beats a
+   closed-form linear ridge on the W79 nonlinear consolidation
+   dataset (post-train MSE ≈ 0.034 vs ridge MSE ≈ 0.45, > 13×
+   gap). The head plugs into the W79 LHR substrate V2 as an
+   *additional* read path; the substrate still works without it.
+3. **MASC V15 / TSC_V14 + tiny_substrate_v24 + V24 stack across
+   19 regimes.** V24 strictly beats V23 on ≥ 50 % of seeds in
+   every regime (100 % in practice across all nineteen regimes,
+   verified at 3 seeds), and TSC_V24 strictly beats TSC_V23 on
+   ≥ 50 % of seeds in every regime (100 % in practice).
+4. **Hosted control plane V12** containing
+   HostedRouterControllerV12 (RTRLD-pressure weighting + RTRLD
+   match table), HostedLogprobRouterV12 (RTRLD-aware abstain
+   floor + 10-pressure tiebreak), HostedCacheAwarePlannerV12
+   (ten-layer rotated; ≥ 90 % savings on 20 × 8 at hit_rate=1.0),
+   HostedCostPlannerV12 (cost-per-RTRLD-success-under-budget +
+   abstain-when-RTRLD-violated), and the **explicit wall V12**
+   HostedRealSubstrateBoundaryV12 that enumerates 56 blocked
+   axes at the hosted surface (W78's 46 + 3 new V24 axes +
+   7 controlled-runtime axes), keeping the W70
+   frontier_blocked_axes set forward unchanged. The new
+   **RTRLD-aware Plane A↔B handoff coordinator V11** adds a
+   controlled-runtime promotion decision on top of W78's V10
+   long-horizon-reconstruction fallback; total cross-plane
+   visible-token savings ≥ 88 % over a 100-turn schedule.
+5. **Replay-vs-recompute V2 arbiter.** The W79 LHR substrate V2
+   records per-query decisions across (substrate_replay,
+   controlled_runtime_recompute, full_transcript_recompute) with
+   explicit cost-per-token economics, plus an abstain path under
+   high RTRLD pressure.
+6. **Bounded-window falsifier V2.** Adds k=64 + cross-prompt
+   summary baselines on top of W78's k∈{4,8,16,32}+rolling.
+   Provably insufficient on horizons ≥ 64 turns under the
+   default config; the W79 V2 substrate solves the same queries.
+
+W79 ships at the explicit-import path ``coordpy.w79_team`` and
+benchmark families ``coordpy.r197_benchmark`` (Plane A V12;
+10 H-bars), ``coordpy.r198_benchmark`` (Plane B V24 + LHR V2;
+20 H-bars), ``coordpy.r199_benchmark`` (multi-agent task success
+across 19 regimes + bounded-window V2 failure bar + LHR V2
+success bar + insufficiency proof; 22 H-bars), and
+``coordpy.r200_benchmark`` (controlled runtime + façade +
+learned consolidation + replay-vs-recompute economics + hosted-
+vs-controlled comparison; 24 H-bars). Total **76 H-bars × 3
+seed sets**, all pass. Two new closed-form ridges on top of
+W78's 79 (cache V22 nineteen-objective + KV V24 twenty-target),
+total **81 ridge solves across W61..W79**, plus one **new
+autograd-backed two-layer head** (the learned-consolidation
+head) — the first explicit-import autograd-style trained module
+in the programme.
+
+``coordpy.__version__ == "0.5.20"``,
+``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version bump.
+No PyPI release. ``W79_FAILURE_MODES`` enumerates 63 disjoint
+failure modes.
 
 ## TL;DR — W78 Stronger Less-Bounded Long-Horizon Reconstruction / Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent Substrate Programme (post-W77 research milestone)
 

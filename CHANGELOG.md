@@ -13,6 +13,96 @@ re-exported through `coordpy.__init__` or
 `coordpy.SDK_VERSION == "coordpy.sdk.v3.43"`, the smoke driver,
 the public symbols) is byte-for-byte unchanged.
 
+- **W79 Stronger Direct-Blocker-Attack /
+  Replacement-Then-Restart-After-Long-Delay / Controlled-Runtime
+  Substrate / OpenAI-Compatible-Façade / Learned-Consolidation
+  Budget-Primary Two-Plane Multi-Agent Substrate Programme**
+  (post-W78, 2026-05-17) —
+  *twenty-fourth substrate-attack milestone; fifteenth **multi-
+  agent task-success-bearing** substrate milestone (first to win
+  across **nineteen** regimes: W78's eighteen plus
+  ``long_delay_reconstruction_after_replacement_then_restart``);
+  first milestone to ship a **directly-controlled second substrate
+  runtime** (``coordpy.controlled_runtime_substrate_v1``), first
+  to ship an **OpenAI-compatible façade** over a controlled runtime
+  (``coordpy.local_openai_compatible_facade_v1``), and first to
+  ship an explicit **autograd-style learned-consolidation head**
+  (``coordpy.learned_consolidation_v1``) — the W79 direct-blocker-
+  attack pillars*. Plane B V24: (M1) **Tiny Substrate V24**
+  inherits V23 + one new V24 axis (per-turn replacement-then-
+  restart-after-long-delay trajectory CID + per-layer length +
+  per-layer pressure gate). (M2) **KV Bridge V24** 20-target +
+  168-dim RTRLD fingerprint + falsifier. (M3) **Cache Controller
+  V22** 19-objective stacked ridge + per-role 20-dim RTRLD-
+  pressure head. (M4) **Replay Controller V20** 27 regimes +
+  17-label RTRLD-aware routing head. (M5) **Deep Substrate Hybrid
+  V24** twenty-four-way bidirectional loop. (M6) **Substrate
+  Adapter V24** ``substrate_v24_full`` + ``controlled_runtime_
+  substrate_v1`` tiers. (M7) **Persistent Latent V31** 30 layers,
+  twenty-eighth carrier (RTRLD EMA), max_chain_walk_depth=
+  67108864. (M8) **Long-Horizon Retention V31** 30 heads, twenty-
+  one-layer scorer, max_k=4096. (M9) **MLSC V27** RTRLD trajectory
+  chain + window chain. (M10) **Consensus / Fallback Controller
+  V25** 44-stage chain. (M11) **Multi-Agent Substrate Coordinator
+  V15** 32-policy, 19-regime MASC V15: V24 strictly beats V23 on
+  ≥ 50 % of seeds in every regime (100 % in practice across all
+  nineteen regimes, verified at 3 seeds), and TSC_V24 strictly
+  beats TSC_V23 on ≥ 50 % of seeds in every regime (100 % in
+  practice). (M12) **Team-Consensus Controller V14** RTRLD-pressure
+  + RTRLD-trajectory arbiters. (M13) **Long-Horizon Reconstruction
+  Substrate V2** optional learned-consolidation slots + replay-vs-
+  recompute V2 arbiter. (M14) **Bounded-Window Baseline V2** k=64
+  + cross-prompt summary baselines (all still fail by construction
+  on the W79 horizon). Plane A V12: (H1) **Hosted Router
+  Controller V12** RTRLD-pressure weighting + RTRLD match table.
+  (H2) **Hosted Logprob Router V12** RTRLD-aware abstain floor +
+  10-pressure tiebreak. (H3) **Hosted Cache-Aware Planner V12**
+  ten-layer rotated; ≥ 90 % savings on 20 × 8 at hit_rate=1.0.
+  (H4) **Hosted Cost Planner V12** cost-per-RTRLD-success-under-
+  budget + abstain-when-RTRLD-violated. (H5) **Hosted Real
+  Substrate Boundary V12** the wall V12 — ≥ 56 blocked axes at
+  the hosted surface (W78's 46 + 3 V24 axes + 7 controlled-
+  runtime axes), W70 frontier_blocked_axes carried forward
+  unchanged. (H6) **Hosted Real Handoff Coordinator V11** the
+  RTRLD-aware Plane A↔B bridge with a new controlled-runtime
+  promotion decision on top of W78's V10 long-horizon-
+  reconstruction fallback; ≥ 88 % cross-plane visible-token
+  savings vs all-hosted on a 100-turn schedule. (H7) **Hosted
+  Provider Filter V11** RTRLD-aware filter. **W79 direct-blocker-
+  attack pillars**: (D1) **Controlled Runtime Substrate V1** —
+  a real transformer-class forward pass over a 4-layer × 4-head
+  × 8-head_dim NumPy runtime with causal attention, real KV
+  cache, real hidden state, real attention probabilities, real
+  per-head attention-bias steering, real prefix-state injection,
+  real per-layer logits, and byte-stable replay-from-KV. (D2)
+  **Local OpenAI-Compatible Façade V1** — an in-process façade
+  exposing the public ``chat.completion`` / ``completion`` /
+  ``embedding`` shape over the controlled runtime, with an
+  optional substrate side channel that hosted APIs do NOT carry.
+  (D3) **Learned Consolidation V1** — a small autograd-style
+  two-layer swish-MLP trained via NumPy SGD+momentum that
+  strictly beats a closed-form linear ridge on the W79 nonlinear
+  consolidation dataset (post-train MSE ≈ 0.034 vs ridge MSE ≈
+  0.45). Benchmark families: ``coordpy.r197_benchmark`` (Plane A
+  V12; 10 H-bars), ``coordpy.r198_benchmark`` (Plane B V24 + LHR
+  V2; 20 H-bars), ``coordpy.r199_benchmark`` (multi-agent task
+  success across 19 regimes + bounded-window V2 failure bar +
+  LHR V2 success bar + insufficiency proof; 22 H-bars),
+  ``coordpy.r200_benchmark`` (controlled runtime + façade +
+  learned consolidation + replay-vs-recompute economics +
+  hosted-vs-controlled comparison; 24 H-bars). Total **76 H-bars
+  × 3 seed sets**, all pass; plus **37 W79 module / team /
+  benchmark / controlled-runtime / learned-consolidation tests**.
+  Two new closed-form ridges on top of W78's 79 (cache V22
+  nineteen-objective + KV V24 twenty-target), total **81 ridge
+  solves across W61..W79**, plus one new autograd-backed two-
+  layer head (the learned-consolidation head) — the first
+  explicit-import autograd-style trained module in the
+  programme. ``coordpy.__version__ == "0.5.20"``,
+  ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version
+  bump. No PyPI release. ``W79_FAILURE_MODES`` enumerates 63
+  disjoint failure modes.
+
 - **W78 Stronger Less-Bounded Long-Horizon Reconstruction /
   Bounded-Window-Falsifier Budget-Primary Two-Plane Multi-Agent
   Substrate Programme** (post-W77, 2026-05-17) —

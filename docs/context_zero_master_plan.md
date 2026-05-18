@@ -1,6 +1,42 @@
 # Context-Zero — Master Plan
 
-> **Latest milestone marker (post-W77 / W78, 2026-05-17 —
+> **Latest milestone marker (post-W78 / W79, 2026-05-17 —
+> Stronger Direct-Blocker-Attack /
+> Replacement-Then-Restart-After-Long-Delay / Controlled-Runtime
+> Substrate / OpenAI-Compatible-Façade / Learned-Consolidation
+> Budget-Primary Two-Plane Multi-Agent Substrate Programme,
+> thirty-seventh post-release research milestone —
+> twenty-fourth substrate-attack milestone and **fifteenth**
+> multi-agent task-success-bearing substrate milestone (the
+> first to win across **nineteen** regimes — W78's eighteen
+> plus ``long_delay_reconstruction_after_replacement_then_
+> restart``), and the **first milestone to ship a directly-
+> controlled second substrate runtime** (``coordpy.controlled_
+> runtime_substrate_v1``) + an **OpenAI-compatible façade** over
+> that runtime (``coordpy.local_openai_compatible_facade_v1``) +
+> an explicit **autograd-style learned-consolidation head**
+> (``coordpy.learned_consolidation_v1``) — the W79 direct-
+> blocker-attack pillars. ``coordpy.tiny_substrate_v24``
+> inherits V23 + one new V24 substrate axis.
+> ``coordpy.multi_agent_substrate_coordinator_v15`` ships 32
+> policies + the new 19th regime.
+> ``coordpy.team_consensus_controller_v14`` ships two new V14
+> arbiters. ``coordpy.hosted_real_handoff_coordinator_v11`` is
+> the **fifteenth-decision** handoff coordinator with RTRLD-
+> aware promotion + RTRLD fallback + controlled-runtime
+> promotion. ``coordpy.long_horizon_reconstruction_substrate_v2``
+> is the NEW reconstruction substrate with optional learned-
+> consolidation slots + a replay-vs-recompute V2 arbiter.
+> ``coordpy.bounded_window_baseline_v2`` is the NEW falsifier
+> family adding k=64 + cross-prompt summary baselines that all
+> still fail on the W79 regime. Total **76 H-bars × 3 seed
+> sets**, all pass; plus **37 W79 module/team/benchmark/
+> controlled-runtime/learned-consolidation tests** also pass.
+> ``coordpy.__version__ == "0.5.20"``,
+> ``coordpy.SDK_VERSION == "coordpy.sdk.v3.43"``. No version
+> bump. No PyPI release.**
+
+> **Previous milestone marker (post-W77 / W78, 2026-05-17 —
 > Stronger Less-Bounded Long-Horizon Reconstruction / Bounded-
 > Window-Falsifier Budget-Primary Two-Plane Multi-Agent
 > Substrate Programme, thirty-sixth post-release research
